@@ -7,54 +7,106 @@
     <style>
         /* Pastel 8-bit style: Soft colors, pixel-like fonts */
         body {
-            font-family: 'Courier New', monospace; /* Retro font */
-            background-color: #f0e6ff; /* Soft lavender background */
-            color: #4a4a4a; /* Dark gray text */
+            font-family: 'Courier New', monospace;
+            background-color: #f0e6ff;
+            color: #4a4a4a;
             margin: 0;
             padding: 20px;
             line-height: 1.6;
         }
         header {
             text-align: center;
-            background-color: #ffe6f7; /* Soft pink */
+            background-color: #ffe6f7;
             padding: 20px;
-            border: 2px solid #ffb3d9; /* Light pink border */
+            border: 2px solid #ffb3d9;
             margin-bottom: 20px;
         }
         h1 {
-            color: #ff66b3; /* Pastel pink */
+            color: #ff66b3;
             font-size: 2em;
         }
+        
+        /* Different pastel colors for each section */
         section {
-            background-color: #e6f7ff; /* Soft blue */
-            border: 2px solid #b3d9ff; /* Light blue border */
             padding: 15px;
             margin-bottom: 20px;
-            border-radius: 8px; /* Slight round for 8-bit feel */
+            border-radius: 8px;
         }
+        
+        #projects {
+            background-color: #fff2e6;
+            border: 2px solid #ffd9b3;
+        }
+        #projects h2 { color: #ff9933; border-bottom-color: #ffd9b3; }
+        
+        #games {
+            background-color: #e6fff7;
+            border: 2px solid #b3ffd9;
+        }
+        #games h2 { color: #66ff99; border-bottom-color: #b3ffd9; }
+        
+        #songs {
+            background-color: #fff7e6;
+            border: 2px solid #ffd9b3;
+        }
+        #songs h2 { color: #ffaa66; border-bottom-color: #ffd9b3; }
+        
+        #visitor-counter {
+            background-color: #ffe6f7;
+            border: 2px solid #ffb3d9;
+        }
+        #visitor-counter h2 { color: #ff66b3; border-bottom-color: #ffb3d9; }
+        
+        #clicker-game {
+            background-color: #e6f7ff;
+            border: 2px solid #b3d9ff;
+        }
+        #clicker-game h2 { color: #66b3ff; border-bottom-color: #b3d9ff; }
+        
+        #dragon-pet {
+            background-color: #f7e6ff;
+            border: 2px solid #d9b3ff;
+        }
+        #dragon-pet h2 { color: #9966ff; border-bottom-color: #d9b3ff; }
+        
+        #guestbook {
+            background-color: #e6ffff;
+            border: 2px solid #b3ffff;
+        }
+        #guestbook h2 { color: #66ffff; border-bottom-color: #b3ffff; }
+        
         h2 {
-            color: #66b3ff; /* Pastel blue */
-            border-bottom: 1px solid #b3d9ff;
             padding-bottom: 5px;
         }
+        
         ul {
-            list-style-type: none; /* No bullets for retro look */
+            list-style-type: none;
             padding: 0;
         }
         li {
             margin-bottom: 10px;
             padding: 5px;
-            background-color: #fff2e6; /* Soft peach */
-            border: 1px solid #ffd9b3; /* Light peach border */
+            background-color: #fff;
+            border: 1px solid #ddd;
         }
         a {
-            color: #ff9933; /* Pastel orange */
+            color: #ff9933;
             text-decoration: none;
         }
         a:hover {
             text-decoration: underline;
         }
-        /* For easy editing: Add comments and simple structure */
+        
+        /* Games side by side */
+        .games-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .games-container section {
+            flex: 1;
+            min-width: 300px;
+        }
     </style>
 </head>
 <body>
@@ -94,14 +146,7 @@
         </ul>
     </section>
 
-    <section id="visitor-counter">
-        <h2>👣 Visitor Counter</h2>
-        <div style="text-align: center; padding: 20px;">
-            <p style="font-size: 3em; margin: 10px 0;">✨ <span id="visit-count">0</span> ✨</p>
-            <p style="color: #999; font-size: 0.9em;">Thanks for stopping by!</p>
-        </div>
-    </section>
-
+    <div class="games-container">
     <section id="clicker-game">
         <h2>🐉 Dragon Clicker <span id="dragon-title" style="font-size: 0.5em;"></span></h2>
         <div style="text-align: center;">
@@ -296,9 +341,17 @@
             <p id="time-since">Come back regularly to care for your dragon!</p>
         </div>
     </section>
+    </div>
 
     <section id="guestbook">
         <h2>💌 Guestbook</h2>
+        <section id="visitor-counter" style="background: #e6ffff; border: 2px solid #b3ffff; margin-top: 15px;">
+            <h3 style="color: #66ffff; margin: 0 0 10px 0;">👣 Visitor Counter</h3>
+            <div style="text-align: center; padding: 10px;">
+                <p style="font-size: 2em; margin: 10px 0;">✨ <span id="visit-count">0</span> ✨</p>
+                <p style="color: #999; font-size: 0.9em;">Thanks for stopping by!</p>
+            </div>
+        </section>
         <p style="text-align: center; color: #999;">Leave a message for Dragon_s4uce!</p>
         <script src="https://giscus.app/client.js"
             data-repo="Dragons4uce/Webstuff"
