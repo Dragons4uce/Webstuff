@@ -103,95 +103,74 @@
     </section>
 
     <section id="clicker-game">
-        <h2>🐉 Dragon Clicker</h2>
+        <h2>🐉 Dragon Clicker <span id="dragon-title" style="font-size: 0.5em;"></span></h2>
         <div style="text-align: center;">
-            <p style="font-size: 1.2em;">Click the dragon to collect gold!</p><br><br>
-            <div style="display: inline-block; position: relative;">
-                <div id="acc-left" style="position: absolute; right: 100%; top: 50%; transform: translateY(-50%); font-size: 1.5em; white-space: nowrap;"></div>
-                <div id="acc-right" style="position: absolute; left: 100%; top: 50%; transform: translateY(-50%); font-size: 1.5em; white-space: nowrap;"></div>
-                <div id="acc-top" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); font-size: 1.5em; white-space: nowrap; margin-bottom: 5px;"></div>
+            <p style="font-size: 1.2em;">Click the dragon to collect gold!</p>
+            <div style="position: relative; display: inline-block; padding: 30px;">
+                <div id="cosmetic-top" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); font-size: 1.5em;"></div>
+                <div id="cosmetic-left" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); font-size: 1.5em;"></div>
+                <div id="cosmetic-right" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 1.5em;"></div>
+                <div id="cosmetic-bottom" style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); font-size: 1.5em;"></div>
                 <div id="dragon-btn" style="font-size: 4em; cursor: pointer; user-select: none; transition: transform 0.1s; display: inline-block;">🐉</div>
             </div>
             <p style="font-size: 2em; color: #ff9933;">💰 <span id="gold-count">0</span></p>
-            <p style="color: #999;">Gold per click: <span id="gpc">1</span> | Gold per second: <span id="gps">0</span></p>
-            <p style="color: #999; font-size: 0.8em;">Prestige Level: <span id="prestige-level">0</span> (bonus: x<span id="prestige-bonus">1</span>)</p>
-            <p style="color: #ff66b3;">🔥 Click Streak: <span id="click-streak">0</span> (bonus: x<span id="streak-bonus">1</span>) <span id="dragon-mood">🐉</span></p>
-            <p style="color: #999; font-size: 0.8em;">🏆 Total Clicks: <span id="total-clicks">0</span></p>
+            <p style="color: #999;">Gold per click: <span id="gpc">1</span> | Gold per second: <span id="gps">0</span> | Multiplier: x<span id="multiplier">1</span></p>
         </div>
-        <div id="event-display" style="text-align: center; padding: 10px; margin: 10px 0; border-radius: 8px; display: none; background: linear-gradient(90deg, #ffeaa7, #fdcb6e);"></div>
         <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px;">
-            <button onclick="buyUpgrade('click', 1)" style="padding: 10px; background: #fff2e6; border: 2px solid #ffd9b3; border-radius: 8px; cursor: pointer;">
-                🖱️ Better Clicks (+1/click) - <span id="cost-click">10</span>💰
+            <button onclick="buyUpgrade('click', 10, 1)" style="padding: 10px; background: #fff2e6; border: 2px solid #ffd9b3; border-radius: 8px; cursor: pointer;">
+                🖱️ Better Clicks (+1/click) - 10💰
             </button>
-            <button onclick="buyUpgrade('auto', 1)" style="padding: 10px; background: #e6f7ff; border: 2px solid #b3d9ff; border-radius: 8px; cursor: pointer;">
-                🐾 Baby Dragon (+1/sec) - <span id="cost-auto">50</span>💰
+            <button onclick="buyUpgrade('auto', 50, 1)" style="padding: 10px; background: #e6f7ff; border: 2px solid #b3d9ff; border-radius: 8px; cursor: pointer;">
+                🐾 Baby Dragon (+1/sec) - 50💰
             </button>
-            <button onclick="buyUpgrade('gold', 5)" style="padding: 10px; background: #ffe6f7; border: 2px solid #ffb3d9; border-radius: 8px; cursor: pointer;">
-                ✨ Golden Scales (+5/sec) - <span id="cost-gold">100</span>💰
+            <button onclick="buyUpgrade('gold', 100, 5)" style="padding: 10px; background: #ffe6f7; border: 2px solid #ffb3d9; border-radius: 8px; cursor: pointer;">
+                ✨ Golden Scales (+5/sec) - 100💰
             </button>
-            <button onclick="buyUpgrade('hoard', 25)" style="padding: 10px; background: #f0e6ff; border: 2px solid #d9b3ff; border-radius: 8px; cursor: pointer;">
-                💎 Dragon Hoard (+25/sec) - <span id="cost-hoard">500</span>💰
-            </button>
-            <button onclick="buyUpgrade('castle', 100)" style="padding: 10px; background: #ffe4e1; border: 2px solid #ffb6c1; border-radius: 8px; cursor: pointer;">
-                🏰 Dragon Castle (+100/sec) - <span id="cost-castle">5,000</span>💰
-            </button>
-            <button onclick="buyUpgrade('kingdom', 500)" style="padding: 10px; background: #fff8dc; border: 2px solid #daa520; border-radius: 8px; cursor: pointer;">
-                👑 Dragon Kingdom (+500/sec) - <span id="cost-kingdom">50,000</span>💰
+            <button onclick="buyUpgrade('hoard', 500, 25)" style="padding: 10px; background: #f0e6ff; border: 2px solid #d9b3ff; border-radius: 8px; cursor: pointer;">
+                💎 Dragon Hoard (+25/sec) - 500💰
             </button>
         </div>
         <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px; border-top: 1px dashed #b3d9ff; padding-top: 15px;">
             <p style="width: 100%; text-align: center; color: #66b3ff; margin: 5px 0;">✨ Dragon Fashion ✨</p>
-            <button onclick="buyCosmetic('flower')" style="padding: 10px; background: #fff0f5; border: 2px solid #ffb6c1; border-radius: 8px; cursor: pointer;">
-                🌸 Flower Crown - <span id="cost-flower">100</span>💰
+            <button onclick="buyCosmetic('flower', 100)" style="padding: 10px; background: #fff0f5; border: 2px solid #ffb6c1; border-radius: 8px; cursor: pointer;">
+                🌸 Flower Crown - 100💰
             </button>
-            <button onclick="buyCosmetic('hat')" style="padding: 10px; background: #f5f5f5; border: 2px solid #a0a0a0; border-radius: 8px; cursor: pointer;">
-                🎩 Top Hat - <span id="cost-hat">500</span>💰
+            <button onclick="buyCosmetic('hat', 500)" style="padding: 10px; background: #f5f5f5; border: 2px solid #a0a0a0; border-radius: 8px; cursor: pointer;">
+                🎩 Top Hat - 500💰
             </button>
-            <button onclick="buyCosmetic('crown')" style="padding: 10px; background: #ffd700; border: 2px solid #daa520; border-radius: 8px; cursor: pointer;">
-                👑 Royal Crown - <span id="cost-crown">1,000</span>💰
+            <button onclick="buyCosmetic('crown', 1000)" style="padding: 10px; background: #ffd700; border: 2px solid #daa520; border-radius: 8px; cursor: pointer;">
+                👑 Royal Crown - 1,000💰
             </button>
-            <button onclick="buyCosmetic('glasses')" style="padding: 10px; background: #e0ffff; border: 2px solid #87ceeb; border-radius: 8px; cursor: pointer;">
-                🕶️ Cool Shades - <span id="cost-glasses">750</span>💰
+            <button onclick="buyCosmetic('glasses', 300)" style="padding: 10px; background: #e0ffff; border: 2px solid #87ceeb; border-radius: 8px; cursor: pointer;">
+                👓 Cool Glasses - 300💰
             </button>
-            <button onclick="buyCosmetic('bow')" style="padding: 10px; background: #ffb6c1; border: 2px solid #ff69b4; border-radius: 8px; cursor: pointer;">
-                🎀 Cute Bow - <span id="cost-bow">300</span>💰
+            <button onclick="buyCosmetic('bow', 750)" style="padding: 10px; background: #ffb6c1; border: 2px solid #ff69b4; border-radius: 8px; cursor: pointer;">
+                🎀 Cute Bow - 750💰
             </button>
-            <button onclick="buyCosmetic('scarf')" style="padding: 10px; background: #98fb98; border: 2px solid #32cd32; border-radius: 8px; cursor: pointer;">
-                🧣 Cozy Scarf - <span id="cost-scarf">800</span>💰
+            <button onclick="buyCosmetic('scarf', 1500)" style="padding: 10px; background: #ff6347; border: 2px solid #dc143c; border-radius: 8px; cursor: pointer;">
+                🧣 Cozy Scarf - 1,500💰
             </button>
-            <button onclick="buyCosmetic('wand')" style="padding: 10px; background: #e6e6fa; border: 2px solid #9370db; border-radius: 8px; cursor: pointer;">
-                🪄 Magic Wand - <span id="cost-wand">1,500</span>💰
+            <button onclick="buyCosmetic('wings', 2500)" style="padding: 10px; background: #e6e6fa; border: 2px solid #9370db; border-radius: 8px; cursor: pointer;">
+                🦋 Fairy Wings - 2,500💰
             </button>
-            <button onclick="buyCosmetic('shield')" style="padding: 10px; background: #f5deb3; border: 2px solid #cd853f; border-radius: 8px; cursor: pointer;">
-                🛡️ Hero Shield - <span id="cost-shield">2,000</span>💰
+            <button onclick="buyCosmetic('potion', 200)" style="padding: 10px; background: #fff8dc; border: 2px solid #daa520; border-radius: 8px; cursor: pointer;">
+                🪴 Potted Gold (+2/sec) - 200💰
             </button>
-            <button onclick="buyCosmetic('wings')" style="padding: 10px; background: #fffacd; border: 2px solid #ffd700; border-radius: 8px; cursor: pointer;">
-                🧚 Fairy Wings - <span id="cost-wings">3,000</span>💰
-            </button>
-            <button onclick="buyCosmetic('potion')" style="padding: 10px; background: #fff8dc; border: 2px solid #daa520; border-radius: 8px; cursor: pointer;">
-                🪴 Potted Gold (+2/sec) - <span id="cost-potion">200</span>💰
-            </button>
-            <button onclick="buyCosmetic('ketchup')" style="padding: 10px; background: #ff0000; border: 2px solid #8b0000; border-radius: 8px; cursor: pointer; color: white;">
+            <button onclick="buyCosmetic('ketchup', 99999)" style="padding: 10px; background: #ff0000; border: 2px solid #8b0000; border-radius: 8px; cursor: pointer; color: white;">
                 🍅 The Dragonsauce - 99,999💰
             </button>
-            <button onclick="buyCosmetic('scepter')" style="padding: 10px; background: #8b0000; border: 2px solid #4a0000; border-radius: 8px; cursor: pointer; color: gold;">
-                💜 The Scepter of S4uce - 25,000💰
-            </button>
-            <button onclick="buyCosmetic('aura')" style="padding: 10px; background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3); border: 2px solid #ff4757; border-radius: 8px; cursor: pointer; color: white;">
-                🌈 Rainbow Aura - 10,000💰
-            </button>
-            <button onclick="buyCosmetic('pet')" style="padding: 10px; background: #ffeaa7; border: 2px solid #fdcb6e; border-radius: 8px; cursor: pointer;">
-                🦎 Tiny Lizard Friend - 7,500💰
-            </button>
         </div>
-        <div style="text-align: center; margin-top: 20px;">
-            <button onclick="prestige()" style="padding: 15px 30px; background: linear-gradient(45deg, #ff6b6b, #feca57); border: 2px solid #ff4757; border-radius: 8px; cursor: pointer; font-size: 1.1em; color: white; font-weight: bold;">
-                🔄 Prestige (Reset EVERYTHING for +50% bonus)
-            </button>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px; border-top: 1px dashed #b3d9ff; padding-top: 15px;">
+            <p style="width: 100%; text-align: center; color: #ff66b3; margin: 5px 0;">🏆 Achievements</p>
+            <div id="achievements" style="display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; width: 100%;"></div>
         </div>
-        <div style="margin-top: 20px; padding: 15px; background: #f0e6ff; border: 2px solid #d9b3ff; border-radius: 8px;">
-            <p style="text-align: center; color: #66b3ff; margin: 5px 0;">🏅 Achievements</p>
-            <div id="achievements" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; font-size: 0.9em;"></div>
+        <div style="text-align: center; margin-top: 15px;">
+            <button id="prestige-btn" onclick="prestige()" style="padding: 10px 20px; background: linear-gradient(45deg, #ff66b3, #ff9933); border: none; border-radius: 8px; cursor: pointer; color: white; font-weight: bold; display: none;">
+                🔄 Prestige (Reset for +50% production)
+            </button>
+            <button onclick="resetGame()" style="padding: 10px; background: #ff4444; border: 2px solid #cc0000; border-radius: 8px; cursor: pointer; color: white; margin-left: 10px;">
+                🗑️ Reset Game
+            </button>
         </div>
     </section>
 
@@ -234,275 +213,97 @@
             let gold = parseInt(localStorage.getItem('dragonGold')) || 0;
             let goldPerClick = parseInt(localStorage.getItem('dragonGPC')) || 1;
             let goldPerSecond = parseInt(localStorage.getItem('dragonGPS')) || 0;
-            let clickStreak = parseInt(localStorage.getItem('clickStreak')) || 0;
-            let totalClicks = parseInt(localStorage.getItem('totalClicks')) || 0;
-            let lastClickTime = parseInt(localStorage.getItem('lastClickTime')) || 0;
-            
-            // Upgrade costs (base costs that scale)
-            const baseCosts = {
-                click: 10,
-                auto: 50,
-                gold: 100,
-                hoard: 500,
-                castle: 5000,
-                kingdom: 50000
-            };
-            
-            // Cosmetic base costs
-            const cosmeticBaseCosts = {
-                flower: 100, hat: 500, crown: 1000, glasses: 750, bow: 300,
-                scarf: 800, wand: 1500, shield: 2000, wings: 3000, potion: 200,
-                ketchup: 99999, scepter: 25000, aura: 10000, pet: 7500
-            };
-            
-            // Track how many of each upgrade purchased
-            let upgradeCounts = JSON.parse(localStorage.getItem('upgradeCounts')) || {
-                click: 0, auto: 0, gold: 0, hoard: 0, castle: 0, kingdom: 0
-            };
-            
-            // Calculate current cost based on purchases
-            function getUpgradeCost(type) {
-                const base = baseCosts[type];
-                const count = upgradeCounts[type];
-                return Math.floor(base * Math.pow(1.15, count));
+            let multiplier = parseFloat(localStorage.getItem('dragonMultiplier')) || 1;
+            let prestigeCount = parseInt(localStorage.getItem('dragonPrestige')) || 0;
+            let totalGoldEarned = parseInt(localStorage.getItem('dragonTotalGold')) || 0;
+            let achievements = JSON.parse(localStorage.getItem('dragonAchievements')) || [];
+
+            // Evolution stages
+            const evolutions = [
+                { min: 0, name: 'Baby Dragon', emoji: '🐉' },
+                { min: 1000, name: 'Young Dragon', emoji: '🐲' },
+                { min: 10000, name: 'Adult Dragon', emoji: '🔥' },
+                { min: 100000, name: 'Ancient Dragon', emoji: '🐛' },
+                { min: 1000000, name: 'Legendary Dragon', emoji: '🌟' }
+            ];
+
+            // Get current evolution
+            function getEvolution() {
+                for (let i = evolutions.length - 1; i >= 0; i--) {
+                    if (totalGoldEarned >= evolutions[i].min) {
+                        return evolutions[i];
+                    }
+                }
+                return evolutions[0];
             }
-            
-            function getCosmeticCost(type) {
-                const base = cosmeticBaseCosts[type];
-                return base; // Cosmetics don't scale in price
-            }
-            
-            // Update cost displays
-            function updateCostDisplays() {
-                document.getElementById('cost-click').textContent = getUpgradeCost('click');
-                document.getElementById('cost-auto').textContent = getUpgradeCost('auto');
-                document.getElementById('cost-gold').textContent = getUpgradeCost('gold');
-                document.getElementById('cost-hoard').textContent = getUpgradeCost('hoard');
-                document.getElementById('cost-castle').textContent = getUpgradeCost('castle');
-                document.getElementById('cost-kingdom').textContent = getUpgradeCost('kingdom');
-                document.getElementById('cost-flower').textContent = getCosmeticCost('flower');
-                document.getElementById('cost-hat').textContent = getCosmeticCost('hat');
-                document.getElementById('cost-crown').textContent = getCosmeticCost('crown');
-                document.getElementById('cost-glasses').textContent = getCosmeticCost('glasses');
-                document.getElementById('cost-bow').textContent = getCosmeticCost('bow');
-                document.getElementById('cost-scarf').textContent = getCosmeticCost('scarf');
-                document.getElementById('cost-wand').textContent = getCosmeticCost('wand');
-                document.getElementById('cost-shield').textContent = getCosmeticCost('shield');
-                document.getElementById('cost-wings').textContent = getCosmeticCost('wings');
-                document.getElementById('cost-potion').textContent = getCosmeticCost('potion');
-            }
-            updateCostDisplays();
+
+            // Apply multiplier
+            function getEffectiveGPC() { return goldPerClick * multiplier; }
+            function getEffectiveGPS() { return goldPerSecond * multiplier; }
 
             // Update initial display
             document.getElementById('gold-count').textContent = gold;
-            document.getElementById('gpc').textContent = goldPerClick;
-            document.getElementById('gps').textContent = goldPerSecond;
-            document.getElementById('click-streak').textContent = clickStreak;
-            document.getElementById('total-clicks').textContent = totalClicks;
-            
-            // Dragon mood based on streak
-            const dragonMoods = ['🐉', '😺', '😸', '😻', '💖', '✨', '🌟', '💫'];
-            function updateDragonMood() {
-                const moodIndex = Math.min(Math.floor(clickStreak / 10), dragonMoods.length - 1);
-                document.getElementById('dragon-mood').textContent = dragonMoods[moodIndex];
-                document.getElementById('streak-bonus').textContent = 1 + Math.floor(clickStreak / 20);
-            }
-            updateDragonMood();
+            document.getElementById('gpc').textContent = getEffectiveGPC();
+            document.getElementById('gps').textContent = getEffectiveGPS();
+            document.getElementById('multiplier').textContent = multiplier;
+
+            // Update dragon emoji based on evolution
+            const currentEvo = getEvolution();
+            document.getElementById('dragon-btn').textContent = currentEvo.emoji;
+            document.getElementById('dragon-title').textContent = currentEvo.name;
 
             // Click handler
             const dragonBtn = document.getElementById('dragon-btn');
             dragonBtn.onclick = function() {
-                // Calculate streak bonus
-                const now = Date.now();
-                if (now - lastClickTime < 2000) {
-                    clickStreak++;
-                } else {
-                    clickStreak = 1;
-                }
-                lastClickTime = now;
-                totalClicks++;
-                
-                const streakBonus = 1 + Math.floor(clickStreak / 20);
-                const earnedGold = goldPerClick * streakBonus;
-                
-                gold += earnedGold;
-                
-                // Track total gold earned
-                let totalGoldEarned = parseInt(localStorage.getItem('totalGoldEarned')) || 0;
-                totalGoldEarned += earnedGold;
-                localStorage.setItem('totalGoldEarned', totalGoldEarned);
-                
-                // Track max streak
-                let maxStreak = parseInt(localStorage.getItem('maxStreak')) || 0;
-                if (clickStreak > maxStreak) {
-                    maxStreak = clickStreak;
-                    localStorage.setItem('maxStreak', maxStreak);
-                }
-                
+                const earned = getEffectiveGPC();
+                gold += earned;
+                totalGoldEarned += earned;
                 document.getElementById('gold-count').textContent = gold;
-                document.getElementById('click-streak').textContent = clickStreak;
-                document.getElementById('streak-bonus').textContent = streakBonus;
-                document.getElementById('total-clicks').textContent = totalClicks;
-                
                 localStorage.setItem('dragonGold', gold);
-                localStorage.setItem('clickStreak', clickStreak);
-                localStorage.setItem('totalClicks', totalClicks);
-                localStorage.setItem('lastClickTime', lastClickTime);
-                
-                updateDragonMood();
-                
+                localStorage.setItem('dragonTotalGold', totalGoldEarned);
                 dragonBtn.style.transform = 'scale(1.2)';
                 setTimeout(function() {
                     dragonBtn.style.transform = 'scale(1)';
                 }, 100);
+                checkAchievements();
+                updateEvolution();
             };
 
-            // Reset streak if inactive for 3 seconds
-            setInterval(function() {
-                if (Date.now() - lastClickTime > 3000 && clickStreak > 0) {
-                    clickStreak = 0;
-                    document.getElementById('click-streak').textContent = 0;
-                    document.getElementById('streak-bonus').textContent = 1;
-                    updateDragonMood();
-                    localStorage.setItem('clickStreak', 0);
-                }
-            }, 1000);
-
-            // ===== RANDOM EVENTS =====
-            const randomEvents = [
-                { text: '💎 Dragon found a shiny gem while stretching! +500 gold!', gold: 500 },
-                { text: '🎁 A wandering merchant gifted the dragon! +200 gold!', gold: 200 },
-                { text: '🌟 Dragon had a prophetic dream! +100 gold!', gold: 100 },
-                { text: '🦴 Dragon found ancient treasure! +1000 gold!', gold: 1000 },
-                { text: '🍀 Lucky day! Dragon found gold! +300 gold!', gold: 300 },
-                { text: '📦 Package arrived! It was dragon supplies! +150 gold!', gold: 150 }
-            ];
-            
-            function showEvent(text) {
-                const eventDisplay = document.getElementById('event-display');
-                eventDisplay.textContent = text;
-                eventDisplay.style.display = 'block';
-                setTimeout(function() {
-                    eventDisplay.style.display = 'none';
-                }, 4000);
-            }
-            
-            // Random event every 30-60 seconds
-            setInterval(function() {
-                if (Math.random() < 0.3) { // 30% chance
-                    const event = randomEvents[Math.floor(Math.random() * randomEvents.length)];
-                    gold += event.gold;
-                    document.getElementById('gold-count').textContent = gold;
-                    localStorage.setItem('dragonGold', gold);
-                    showEvent(event.text);
-                }
-            }, 30000);
-
-            // ===== ACHIEVEMENTS =====
-            const achievements = [
-                { id: 'first_click', name: 'First Steps', desc: 'Click the dragon once', icon: '👆', check: function() { return totalClicks >= 1; } },
-                { id: 'clicks_100', name: 'Getting Started', desc: '100 total clicks', icon: '👆👆', check: function() { return totalClicks >= 100; } },
-                { id: 'clicks_1000', name: 'Click Master', desc: '1,000 total clicks', icon: '🖱️', check: function() { return totalClicks >= 1000; } },
-                { id: 'gold_1000', name: 'Rich Dragon', desc: 'Earn 1,000 total gold', icon: '💰', check: function() { return parseInt(localStorage.getItem('totalGoldEarned') || 0) >= 1000; } },
-                { id: 'gold_10000', name: 'Hoarder', desc: 'Earn 10,000 total gold', icon: '💎', check: function() { return parseInt(localStorage.getItem('totalGoldEarned') || 0) >= 10000; } },
-                { id: 'prestige_1', name: 'Reborn', desc: 'Prestige once', icon: '🔄', check: function() { return prestigeLevel >= 1; } },
-                { id: 'streak_50', name: 'On Fire!', desc: 'Get a 50 click streak', icon: '🔥', check: function() { return parseInt(localStorage.getItem('maxStreak') || 0) >= 50; } },
-                { id: 'all_cosmetics', name: 'Fashion Dragon', desc: 'Own all cosmetics', icon: '👗', check: function() { return ownedCosmetics.length >= 14; } },
-                { id: 'ketchup', name: 'Sauce Lord', desc: 'Buy the Ketchup of Dragonsauce', icon: '🍅', check: function() { return ownedCosmetics.includes('ketchup'); } }
-            ];
-            
-            let earnedAchievements = JSON.parse(localStorage.getItem('earnedAchievements')) || [];
-            
-            function checkAchievements() {
-                const container = document.getElementById('achievements');
-                container.innerHTML = '';
-                achievements.forEach(function(ach) {
-                    const earned = earnedAchievements.includes(ach.id) || ach.check();
-                    if (earned && !earnedAchievements.includes(ach.id)) {
-                        earnedAchievements.push(ach.id);
-                        localStorage.setItem('earnedAchievements', JSON.stringify(earnedAchievements));
-                        showEvent('🏅 ACHIEVEMENT UNLOCKED: ' + ach.name + ' ' + ach.icon);
-                    }
-                    const span = document.createElement('span');
-                    span.textContent = earned ? ach.icon : '🔒';
-                    span.title = ach.name + ': ' + ach.desc;
-                    span.style.cursor = 'pointer';
-                    span.style.padding = '5px';
-                    span.style.background = earned ? '#ffeaa7' : '#ddd';
-                    span.style.borderRadius = '5px';
-                    container.appendChild(span);
-                });
-            }
-            checkAchievements();
-
-            // ===== DRAGON EVOLUTION =====
-            let dragonStage = parseInt(localStorage.getItem('dragonStage')) || 0;
-            const dragonStages = ['🐉', '🐲', '🔥', '🌟'];
-            const dragonNames = ['Baby Dragon', 'Young Dragon', 'Ancient Dragon', 'Legendary Dragon'];
-            
-            function updateDragonEvolution() {
-                // Evolution based on total clicks
-                const evolutionThresholds = [0, 500, 2000, 10000];
-                for (let i = dragonStages.length - 1; i >= 0; i--) {
-                    if (totalClicks >= evolutionThresholds[i]) {
-                        dragonStage = i;
-                        break;
-                    }
-                }
-                document.getElementById('dragon-btn').textContent = dragonStages[dragonStage];
-                localStorage.setItem('dragonStage', dragonStage);
-            }
-            updateDragonEvolution();
-
             // Make buyUpgrade available globally
-            window.buyUpgrade = function(type, bonus) {
-                const baseCost = { click: 10, auto: 50, gold: 100, hoard: 500, castle: 5000, kingdom: 50000 };
-                const cost = baseCost[type];
+            window.buyUpgrade = function(type, cost, bonus) {
                 if (gold >= cost) {
                     gold -= cost;
-                    
                     if (type === 'click') {
                         goldPerClick += bonus;
-                        document.getElementById('gpc').textContent = goldPerClick;
+                        document.getElementById('gpc').textContent = getEffectiveGPC();
                         localStorage.setItem('dragonGPC', goldPerClick);
                     } else {
                         goldPerSecond += bonus;
-                        document.getElementById('gps').textContent = goldPerSecond;
+                        document.getElementById('gps').textContent = getEffectiveGPS();
                         localStorage.setItem('dragonGPS', goldPerSecond);
                     }
                     document.getElementById('gold-count').textContent = gold;
                     localStorage.setItem('dragonGold', gold);
                 } else {
-                    alert('Not enough gold! Need ' + cost + '💰 🐉');
+                    alert('Not enough gold! Keep clicking! 🐉');
                 }
             };
-
-            // Prestige system
-            let prestigeLevel = parseInt(localStorage.getItem('dragonPrestige')) || 0;
-            let prestigeMultiplier = 1 + (prestigeLevel * 0.5);
-            document.getElementById('prestige-level').textContent = prestigeLevel;
-            document.getElementById('prestige-bonus').textContent = prestigeMultiplier;
-
-            // Apply prestige bonus to base stats
-            goldPerClick = Math.floor(goldPerClick * prestigeMultiplier);
-            goldPerSecond = Math.floor(goldPerSecond * prestigeMultiplier);
 
             // Cosmetic items with positions
             const cosmetics = {
                 flower: { emoji: '🌸', name: 'Flower Crown', bonus: 0, pos: 'top' },
                 hat: { emoji: '🎩', name: 'Top Hat', bonus: 0, pos: 'top' },
                 crown: { emoji: '👑', name: 'Royal Crown', bonus: 0, pos: 'top' },
-                glasses: { emoji: '🕶️', name: 'Cool Shades', bonus: 0, pos: 'top' },
-                bow: { emoji: '🎀', name: 'Cute Bow', bonus: 0, pos: 'left' },
-                scarf: { emoji: '🧣', name: 'Cozy Scarf', bonus: 0, pos: 'left' },
-                wand: { emoji: '🪄', name: 'Magic Wand', bonus: 5, pos: 'right' },
-                shield: { emoji: '🛡️', name: 'Hero Shield', bonus: 10, pos: 'right' },
-                wings: { emoji: '🧚', name: 'Fairy Wings', bonus: 15, pos: 'left' },
+                glasses: { emoji: '👓', name: 'Cool Glasses', bonus: 0, pos: 'top' },
+                bow: { emoji: '🎀', name: 'Cute Bow', bonus: 0, pos: 'top' },
+                scarf: { emoji: '🧣', name: 'Cozy Scarf', bonus: 0, pos: 'bottom' },
+                wings: { emoji: '🧚', name: 'Fairy Wings', bonus: 0, pos: 'left' },
                 potion: { emoji: '🪴', name: 'Potted Gold', bonus: 2, pos: 'right' },
-                ketchup: { emoji: '🍅', name: 'Ketchup of Dragonsauce', bonus: 100, pos: 'top' },
-                scepter: { emoji: '💜', name: 'Scepter of S4uce', bonus: 50, pos: 'right' },
-                aura: { emoji: '🌈', name: 'Rainbow Aura', bonus: 25, pos: 'top' },
-                pet: { emoji: '🦎', name: 'Tiny Lizard Friend', bonus: 20, pos: 'left' }
+                ketchup: { emoji: '🍅', name: 'The Dragonsauce', bonus: 100, pos: 'right' },
+                shield: { emoji: '🛡️', name: 'Golden Shield', bonus: 5, pos: 'left' },
+                staff: { emoji: '🪄', name: 'Magic Staff', bonus: 10, pos: 'right' },
+                halo: { emoji: '😇', name: 'Holy Halo', bonus: 25, pos: 'top' },
+                cape: { emoji: '🦸', name: 'Hero Cape', bonus: 15, pos: 'bottom' }
             };
 
             // Load owned cosmetics
@@ -514,33 +315,25 @@
                     goldPerSecond += cosmetics[item].bonus;
                 }
             });
-            document.getElementById('gps').textContent = goldPerSecond;
+            document.getElementById('gps').textContent = getEffectiveGPS();
 
-            // Display cosmetics on dragon (surrounding it)
+            // Display cosmetics around dragon
             function updateCosmetics() {
-                document.getElementById('acc-left').innerHTML = '';
-                document.getElementById('acc-right').innerHTML = '';
-                document.getElementById('acc-top').innerHTML = '';
-                
+                const positions = { top: '', left: '', right: '', bottom: '' };
                 ownedCosmetics.forEach(function(item) {
                     if (cosmetics[item]) {
-                        const c = cosmetics[item];
-                        if (c.pos === 'left') {
-                            document.getElementById('acc-left').innerHTML += c.emoji + ' ';
-                        } else if (c.pos === 'right') {
-                            document.getElementById('acc-right').innerHTML += c.emoji + ' ';
-                        } else if (c.pos === 'top') {
-                            document.getElementById('acc-top').innerHTML += c.emoji + ' ';
-                        }
+                        positions[cosmetics[item].pos] += cosmetics[item].emoji + ' ';
                     }
                 });
+                document.getElementById('cosmetic-top').textContent = positions.top;
+                document.getElementById('cosmetic-left').textContent = positions.left;
+                document.getElementById('cosmetic-right').textContent = positions.right;
+                document.getElementById('cosmetic-bottom').textContent = positions.bottom;
             }
             updateCosmetics();
 
             // Make buyCosmetic available globally
-            window.buyCosmetic = function(item) {
-                const costs = { flower: 100, hat: 500, crown: 1000, glasses: 750, bow: 300, scarf: 800, wand: 1500, shield: 2000, wings: 3000, potion: 200, ketchup: 99999, scepter: 25000, aura: 10000, pet: 7500 };
-                const cost = costs[item] || 100;
+            window.buyCosmetic = function(item, cost) {
                 if (ownedCosmetics.includes(item)) {
                     alert('You already have this! 🐉');
                     return;
@@ -551,83 +344,166 @@
                     localStorage.setItem('dragonCosmetics', JSON.stringify(ownedCosmetics));
                     
                     // Apply bonus
-                    if (cosmetics[item] && cosmetics[item].bonus) {
+                    if (cosmetics[item].bonus) {
                         goldPerSecond += cosmetics[item].bonus;
-                        document.getElementById('gps').textContent = goldPerSecond;
+                        document.getElementById('gps').textContent = getEffectiveGPS();
                         localStorage.setItem('dragonGPS', goldPerSecond);
                     }
                     
                     document.getElementById('gold-count').textContent = gold;
                     localStorage.setItem('dragonGold', gold);
                     updateCosmetics();
-                    checkAchievements();
-                    alert('You got ' + (cosmetics[item] ? cosmetics[item].name : item) + '! 🐉✨');
+                    alert('You got ' + cosmetics[item].name + '! 🐉✨');
                 } else {
-                    alert('Not enough gold! Need ' + cost + '💰 🐉');
+                    alert('Not enough gold! Keep clicking! 🐉');
                 }
             };
 
-            // Prestige function
-            window.prestige = function() {
-                if (gold < 1000) {
-                    alert('You need at least 1,000 gold to prestige! 🐉');
-                    return;
-                }
-                if (!confirm('PRESTIGE? This will reset EVERYTHING (gold, upgrades, cosmetics) but give you a +50% permanent bonus to all production! 🐉✨')) {
-                    return;
-                }
-                // Increase prestige level
-                prestigeLevel += 1;
-                localStorage.setItem('dragonPrestige', prestigeLevel);
+            // Achievements
+            const achievementList = [
+                { id: 'first_click', name: 'First Steps', desc: 'Click the dragon 10 times', req: 10, type: 'clicks' },
+                { id: 'hundred_clicks', name: 'Getting Serious', desc: 'Click 100 times', req: 100, type: 'clicks' },
+                { id: 'thousand_clicks', name: 'Click Master', desc: 'Click 1,000 times', req: 1000, type: 'clicks' },
+                { id: 'first_gold', name: 'Treasure Hunter', desc: 'Earn 100 gold', req: 100, type: 'gold' },
+                { id: 'thousand_gold', name: 'Wealthy Dragon', desc: 'Earn 1,000 gold', req: 1000, type: 'gold' },
+                { id: 'million_gold', name: 'Dragon Tycoon', desc: 'Earn 1,000,000 gold', req: 1000000, type: 'gold' },
+                { id: 'first_buy', name: 'Shopper', desc: 'Buy your first upgrade', req: 1, type: 'upgrades' },
+                { id: 'cosmetic_lover', name: 'Fashion Dragon', desc: 'Buy 5 cosmetics', req: 5, type: 'cosmetics' },
+                { id: 'prestige_1', name: 'Rebirth', desc: 'Prestige once', req: 1, type: 'prestige' },
+                { id: 'evolution_1', name: 'Growing Up', desc: 'Reach Young Dragon', req: 1000, type: 'total' }
+            ];
+
+            let clickCount = parseInt(localStorage.getItem('dragonClicks')) || 0;
+            let upgradeCount = parseInt(localStorage.getItem('dragonUpgrades')) || 0;
+
+            function checkAchievements() {
+                clickCount++;
+                localStorage.setItem('dragonClicks', clickCount);
                 
-                // Reset EVERYTHING
+                let changed = false;
+                achievementList.forEach(function(ach) {
+                    if (achievements.includes(ach.id)) return;
+                    
+                    let met = false;
+                    if (ach.type === 'clicks' && clickCount >= ach.req) met = true;
+                    if (ach.type === 'gold' && totalGoldEarned >= ach.req) met = true;
+                    if (ach.type === 'upgrades' && upgradeCount >= ach.req) met = true;
+                    if (ach.type === 'cosmetics' && ownedCosmetics.length >= ach.req) met = true;
+                    if (ach.type === 'prestige' && prestigeCount >= ach.req) met = true;
+                    if (ach.type === 'total' && totalGoldEarned >= ach.req) met = true;
+                    
+                    if (met) {
+                        achievements.push(ach.id);
+                        localStorage.setItem('dragonAchievements', JSON.stringify(achievements));
+                        alert('🏆 Achievement Unlocked: ' + ach.name + '!\n' + ach.desc);
+                        changed = true;
+                    }
+                });
+                if (changed) renderAchievements();
+            }
+
+            function renderAchievements() {
+                const container = document.getElementById('achievements');
+                container.innerHTML = '';
+                achievementList.forEach(function(ach) {
+                    const earned = achievements.includes(ach.id);
+                    const span = document.createElement('span');
+                    span.textContent = earned ? '🏆' : '🔒';
+                    span.title = ach.name + ': ' + ach.desc;
+                    span.style.fontSize = '1.5em';
+                    span.style.opacity = earned ? '1' : '0.3';
+                    container.appendChild(span);
+                });
+            }
+            renderAchievements();
+
+            // Update evolution display
+            function updateEvolution() {
+                const evo = getEvolution();
+                document.getElementById('dragon-btn').textContent = evo.emoji;
+                document.getElementById('dragon-title').textContent = evo.name;
+            }
+
+            // Prestige system
+            function updatePrestigeButton() {
+                const btn = document.getElementById('prestige-btn');
+                if (totalGoldEarned >= 5000) {
+                    btn.style.display = 'inline-block';
+                } else {
+                    btn.style.display = 'none';
+                }
+            }
+            updatePrestigeButton();
+
+            window.prestige = function() {
+                if (totalGoldEarned < 5000) return;
+                if (!confirm('Prestige? You will reset your gold and upgrades but gain a +50% permanent production bonus!')) return;
+                
+                prestigeCount++;
+                multiplier += 0.5;
+                
+                // Reset game state
                 gold = 0;
                 goldPerClick = 1;
                 goldPerSecond = 0;
-                clickStreak = 0;
+                totalGoldEarned = 0;
                 ownedCosmetics = [];
-                upgradeCounts = { click: 0, auto: 0, gold: 0, hoard: 0, castle: 0, kingdom: 0 };
-                dragonStage = 0;
+                clickCount = 0;
+                upgradeCount = 0;
                 
-                // Clear all game data
+                // Save prestige data
+                localStorage.setItem('dragonPrestige', prestigeCount);
+                localStorage.setItem('dragonMultiplier', multiplier);
                 localStorage.setItem('dragonGold', 0);
                 localStorage.setItem('dragonGPC', 1);
                 localStorage.setItem('dragonGPS', 0);
-                localStorage.setItem('clickStreak', 0);
-                localStorage.setItem('totalClicks', 0);
+                localStorage.setItem('dragonTotalGold', 0);
                 localStorage.setItem('dragonCosmetics', '[]');
-                localStorage.setItem('upgradeCounts', JSON.stringify(upgradeCounts));
-                localStorage.setItem('dragonStage', 0);
+                localStorage.setItem('dragonClicks', 0);
+                localStorage.setItem('dragonUpgrades', 0);
                 
                 // Update display
-                prestigeMultiplier = 1 + (prestigeLevel * 0.5);
-                document.getElementById('prestige-level').textContent = prestigeLevel;
-                document.getElementById('prestige-bonus').textContent = prestigeMultiplier;
                 document.getElementById('gold-count').textContent = 0;
-                document.getElementById('gpc').textContent = 1;
-                document.getElementById('gps').textContent = 0;
-                document.getElementById('click-streak').textContent = 0;
-                document.getElementById('streak-bonus').textContent = 1;
-                document.getElementById('dragon-mood').textContent = '🐉';
-                document.getElementById('dragon-btn').textContent = '🐉';
+                document.getElementById('gpc').textContent = getEffectiveGPC();
+                document.getElementById('gps').textContent = getEffectiveGPS();
+                document.getElementById('multiplier').textContent = multiplier;
+                updateCosmetics();
+                updateEvolution();
+                updatePrestigeButton();
                 
-                // Clear cosmetics display
-                document.getElementById('acc-left').innerHTML = '';
-                document.getElementById('acc-right').innerHTML = '';
-                document.getElementById('acc-top').innerHTML = '';
+                alert('🎉 You have prestiged! Production multiplier is now x' + multiplier + '!');
+            };
+
+            // Reset game
+            window.resetGame = function() {
+                if (!confirm('Are you sure you want to reset EVERYTHING? This cannot be undone!')) return;
                 
-                updateCostDisplays();
-                checkAchievements();
+                localStorage.removeItem('dragonGold');
+                localStorage.removeItem('dragonGPC');
+                localStorage.removeItem('dragonGPS');
+                localStorage.removeItem('dragonCosmetics');
+                localStorage.removeItem('dragonTotalGold');
+                localStorage.removeItem('dragonClicks');
+                localStorage.removeItem('dragonUpgrades');
+                localStorage.removeItem('dragonAchievements');
+                localStorage.removeItem('dragonPrestige');
+                localStorage.removeItem('dragonMultiplier');
                 
-                alert('PRESTIGE SUCCESS! You are now level ' + prestigeLevel + ' with ' + prestigeMultiplier + 'x production! All cosmetics and upgrades reset! 🐉💰');
+                location.reload();
             };
 
             // Auto-gold every second
             setInterval(function() {
                 if (goldPerSecond > 0) {
-                    gold += goldPerSecond;
+                    const earned = getEffectiveGPS();
+                    gold += earned;
+                    totalGoldEarned += earned;
                     document.getElementById('gold-count').textContent = gold;
                     localStorage.setItem('dragonGold', gold);
+                    localStorage.setItem('dragonTotalGold', totalGoldEarned);
+                    checkAchievements();
+                    updateEvolution();
+                    updatePrestigeButton();
                 }
             }, 1000);
         });
