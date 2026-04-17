@@ -106,12 +106,12 @@
         <h2>🐉 Dragon Clicker <span id="dragon-title" style="font-size: 0.5em;"></span></h2>
         <div style="text-align: center;">
             <p style="font-size: 1.2em;">Click the dragon to collect gold!</p>
-            <div style="position: relative; display: inline-block; padding: 30px;">
-                <div id="cosmetic-top" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); font-size: 1.5em;"></div>
-                <div id="cosmetic-left" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); font-size: 1.5em;"></div>
-                <div id="cosmetic-right" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 1.5em;"></div>
-                <div id="cosmetic-bottom" style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); font-size: 1.5em;"></div>
-                <div id="dragon-btn" style="font-size: 4em; cursor: pointer; user-select: none; transition: transform 0.1s; display: inline-block;">🐉</div>
+            <div style="position: relative; display: inline-block; width: 150px; height: 150px; margin: 20px;">
+                <div id="cosmetic-top" style="position: absolute; top: -30px; left: 50%; transform: translateX(-50%); font-size: 1.8em; white-space: nowrap;"></div>
+                <div id="cosmetic-left" style="position: absolute; left: -40px; top: 50%; transform: translateY(-50%); font-size: 1.8em;"></div>
+                <div id="cosmetic-right" style="position: absolute; right: -40px; top: 50%; transform: translateY(-50%); font-size: 1.8em;"></div>
+                <div id="cosmetic-bottom" style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); font-size: 1.8em; white-space: nowrap;"></div>
+                <div id="dragon-btn" style="font-size: 4em; cursor: pointer; user-select: none; transition: transform 0.1s; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">🐉</div>
             </div>
             <p style="font-size: 2em; color: #ff9933;">💰 <span id="gold-count">0</span></p>
             <p style="color: #999;">Gold per click: <span id="gpc">1</span> | Gold per second: <span id="gps">0</span> | Multiplier: x<span id="multiplier">1</span></p>
@@ -159,13 +159,49 @@
             <button onclick="buyCosmetic('ketchup', 99999)" style="padding: 10px; background: #ff0000; border: 2px solid #8b0000; border-radius: 8px; cursor: pointer; color: white;">
                 🍅 The Dragonsauce - 99,999💰
             </button>
+            <button onclick="buyCosmetic('shield', 800)" style="padding: 10px; background: #f0f8ff; border: 2px solid #4682b4; border-radius: 8px; cursor: pointer;">
+                🛡️ Golden Shield (+5/sec) - 800💰
+            </button>
+            <button onclick="buyCosmetic('staff', 2000)" style="padding: 10px; background: #4b0082; border: 2px solid #9400d3; border-radius: 8px; cursor: pointer; color: white;">
+                🪄 Magic Staff (+10/sec) - 2,000💰
+            </button>
+            <button onclick="buyCosmetic('halo', 5000)" style="padding: 10px; background: #fffacd; border: 2px solid #ffd700; border-radius: 8px; cursor: pointer;">
+                😇 Holy Halo (+25/sec) - 5,000💰
+            </button>
+            <button onclick="buyCosmetic('cape', 3000)" style="padding: 10px; background: #dc143c; border: 2px solid #8b0000; border-radius: 8px; cursor: pointer; color: white;">
+                🦸 Hero Cape (+15/sec) - 3,000💰
+            </button>
+            <button onclick="buyCosmetic('sword', 4000)" style="padding: 10px; background: #c0c0c0; border: 2px solid #808080; border-radius: 8px; cursor: pointer;">
+                ⚔️ Dragon Sword (+20/sec) - 4,000💰
+            </button>
+            <button onclick="buyCosmetic('orb', 6000)" style="padding: 10px; background: #4a0080; border: 2px solid #8b0080; border-radius: 8px; cursor: pointer; color: white;">
+                🔮 Magic Orb (+30/sec) - 6,000💰
+            </button>
+            <button onclick="buyCosmetic('crown_glow', 8000)" style="padding: 10px; background: linear-gradient(45deg, #ffd700, #ff69b4); border: 2px solid #ff1493; border-radius: 8px; cursor: pointer;">
+                🌟 Glowing Crown (+40/sec) - 8,000💰
+            </button>
+            <button onclick="buyCosmetic('aura', 12000)" style="padding: 10px; background: linear-gradient(45deg, #00ff00, #00ffff); border: 2px solid #00ced1; border-radius: 8px; cursor: pointer;">
+                ✨ Dragon Aura (+50/sec) - 12,000💰
+            </button>
+            <button onclick="buyCosmetic('throne', 20000)" style="padding: 10px; background: #8b4513; border: 2px solid #daa520; border-radius: 8px; cursor: pointer; color: white;">
+               ️ Mini Throne (+75/sec) - 20,000💰
+            </button>
+            <button onclick="buyCosmetic('rainbow', 30000)" style="padding: 10px; background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); border: 2px solid #ff00ff; border-radius: 8px; cursor: pointer;">
+                🌈 Rainbow Sparkles (+100/sec) - 30,000💰
         </div>
         <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px; border-top: 1px dashed #b3d9ff; padding-top: 15px;">
             <p style="width: 100%; text-align: center; color: #ff66b3; margin: 5px 0;">🏆 Achievements</p>
             <div id="achievements" style="display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; width: 100%;"></div>
         </div>
         <div style="text-align: center; margin-top: 15px;">
-            <button id="prestige-btn" onclick="prestige()" style="padding: 10px 20px; background: linear-gradient(45deg, #ff66b3, #ff9933); border: none; border-radius: 8px; cursor: pointer; color: white; font-weight: bold; display: none;">
+            <button id="prestige-btn" onclick="doPrestige()" style="padding: 10px 20px; background: linear-gradient(45deg, #ff66b3, #ff9933); border: none; border-radius: 8px; cursor: pointer; color: white; font-weight: bold; display: none;">
+                🔄 Prestige (Reset for +50% production)
+            </button>
+            <button onclick="doReset()" style="padding: 10px; background: #ff4444; border: 2px solid #cc0000; border-radius: 8px; cursor: pointer; color: white; margin-left: 10px;">
+                🗑️ Reset Game
+            </button>
+        </div>
+    </section>
                 🔄 Prestige (Reset for +50% production)
             </button>
             <button onclick="resetGame()" style="padding: 10px; background: #ff4444; border: 2px solid #cc0000; border-radius: 8px; cursor: pointer; color: white; margin-left: 10px;">
@@ -303,7 +339,13 @@
                 shield: { emoji: '🛡️', name: 'Golden Shield', bonus: 5, pos: 'left' },
                 staff: { emoji: '🪄', name: 'Magic Staff', bonus: 10, pos: 'right' },
                 halo: { emoji: '😇', name: 'Holy Halo', bonus: 25, pos: 'top' },
-                cape: { emoji: '🦸', name: 'Hero Cape', bonus: 15, pos: 'bottom' }
+                cape: { emoji: '🦸', name: 'Hero Cape', bonus: 15, pos: 'bottom' },
+                sword: { emoji: '⚔️', name: 'Dragon Sword', bonus: 20, pos: 'right' },
+                orb: { emoji: '🔮', name: 'Magic Orb', bonus: 30, pos: 'right' },
+                crown_glow: { emoji: '🌟', name: 'Glowing Crown', bonus: 40, pos: 'top' },
+                aura: { emoji: '✨', name: 'Dragon Aura', bonus: 50, pos: 'left' },
+                throne: { emoji: '🪑', name: 'Mini Throne', bonus: 75, pos: 'bottom' },
+                rainbow: { emoji: '🌈', name: 'Rainbow Sparkles', bonus: 100, pos: 'top' }
             };
 
             // Load owned cosmetics
@@ -435,7 +477,7 @@
             }
             updatePrestigeButton();
 
-            window.prestige = function() {
+            window.doPrestige = function() {
                 if (totalGoldEarned < 5000) return;
                 if (!confirm('Prestige? You will reset your gold and upgrades but gain a +50% permanent production bonus!')) return;
                 
@@ -475,7 +517,7 @@
             };
 
             // Reset game
-            window.resetGame = function() {
+            window.doReset = function() {
                 if (!confirm('Are you sure you want to reset EVERYTHING? This cannot be undone!')) return;
                 
                 localStorage.removeItem('dragonGold');
