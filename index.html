@@ -129,6 +129,24 @@
             <button onclick="buyUpgrade('hoard', 500, 25)" style="padding: 10px; background: #f0e6ff; border: 2px solid #d9b3ff; border-radius: 8px; cursor: pointer;">
                 💎 Dragon Hoard (+25/sec) - 500💰
             </button>
+            <button onclick="buyUpgrade('mine', 1000, 50)" style="padding: 10px; background: #4a4a4a; border: 2px solid #2a2a2a; border-radius: 8px; cursor: pointer; color: white;">
+                ⛏️ Gold Mine (+50/sec) - 1,000💰
+            </button>
+            <button onclick="buyUpgrade('vault', 2500, 100)" style="padding: 10px; background: #8b4513; border: 2px solid #5c2e0a; border-radius: 8px; cursor: pointer; color: white;">
+                🏦 Dragon Vault (+100/sec) - 2,500💰
+            </button>
+            <button onclick="buyUpgrade('bank', 5000, 200)" style="padding: 10px; background: #1a1a4a; border: 2px solid #0a0a2a; border-radius: 8px; cursor: pointer; color: white;">
+                🏛️ Ancient Bank (+200/sec) - 5,000💰
+            </button>
+            <button onclick="buyUpgrade('treasury', 10000, 500)" style="padding: 10px; background: #ffd700; border: 2px solid #b8860b; border-radius: 8px; cursor: pointer;">
+                💰 Royal Treasury (+500/sec) - 10,000💰
+            </button>
+            <button onclick="buyUpgrade('fortress', 25000, 1000)" style="padding: 10px; background: #8b0000; border: 2px solid #5c0000; border-radius: 8px; cursor: pointer; color: white;">
+                🏰 Gold Fortress (+1,000/sec) - 25,000💰
+            </button>
+            <button onclick="buyUpgrade('kingdom', 50000, 2500)" style="padding: 10px; background: linear-gradient(45deg, #ffd700, #ff69b4); border: 2px solid #ff1493; border-radius: 8px; cursor: pointer;">
+                👑 Dragon Kingdom (+2,500/sec) - 50,000💰
+            </button>
         </div>
         <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px; border-top: 1px dashed #b3d9ff; padding-top: 15px;">
             <p style="width: 100%; text-align: center; color: #66b3ff; margin: 5px 0;">✨ Dragon Fashion ✨</p>
@@ -193,20 +211,89 @@
             <p style="width: 100%; text-align: center; color: #ff66b3; margin: 5px 0;">🏆 Achievements</p>
             <div id="achievements" style="display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; width: 100%;"></div>
         </div>
-        <div style="text-align: center; margin-top: 15px;">
+        <div style="text-align: center; margin-top: 15px; padding: 15px; background: #f0e6ff; border: 2px solid #d9b3ff; border-radius: 8px;">
+            <p style="color: #9966cc; margin: 0 0 10px 0; font-weight: bold;">⚡ Prestige (Boosts Production)</p>
             <button id="prestige-btn" onclick="doPrestige()" style="padding: 10px 20px; background: linear-gradient(45deg, #ff66b3, #ff9933); border: none; border-radius: 8px; cursor: pointer; color: white; font-weight: bold; display: none;">
-                🔄 Prestige (Reset for +50% production)
+                🔄 Prestige - Get +50% Production Boost!
             </button>
-            <button onclick="doReset()" style="padding: 10px; background: #ff4444; border: 2px solid #cc0000; border-radius: 8px; cursor: pointer; color: white; margin-left: 10px;">
-                🗑️ Reset Game
+        </div>
+        <div style="text-align: center; margin-top: 10px;">
+            <button onclick="doReset()" style="padding: 10px; background: #ff4444; border: 2px solid #cc0000; border-radius: 8px; cursor: pointer; color: white;">
+                🗑️ Reset Game (Wipe All Progress)
             </button>
         </div>
     </section>
-                🔄 Prestige (Reset for +50% production)
+
+    <section id="dragon-pet">
+        <h2>🥚 Dragon Pet</h2>
+        <div style="text-align: center;">
+            <div id="pet-display" style="font-size: 5em; margin: 20px 0; position: relative; display: inline-block;">
+                <div id="pet-status" style="position: absolute; top: -20px; right: -30px; font-size: 0.4em;"></div>
+                🥚
+            </div>
+            <p id="pet-name" style="font-size: 1.5em; color: #ff66b3; font-weight: bold;">Your Dragon Egg</p>
+            <p id="pet-message" style="color: #999; font-style: italic;">Waiting to hatch...</p>
+        </div>
+        
+        <!-- Stats Display -->
+        <div style="display: flex; justify-content: center; gap: 20px; margin: 20px 0; flex-wrap: wrap;">
+            <div style="text-align: center;">
+                <div style="width: 60px; height: 60px; background: #fff2e6; border: 2px solid #ffd9b3; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2em;">🍖</div>
+                <p>Hunger</p>
+                <div id="hunger-bar" style="width: 80px; height: 10px; background: #ddd; border-radius: 5px; overflow: hidden; margin: 0 auto;">
+                    <div id="hunger-fill" style="width: 100%; height: 100%; background: #ff9933; transition: width 0.3s;"></div>
+                </div>
+                <span id="hunger-val">100</span>%
+            </div>
+            <div style="text-align: center;">
+                <div style="width: 60px; height: 60px; background: #ffe6f7; border: 2px solid #ffb3d9; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2em;">💖</div>
+                <p>Happy</p>
+                <div id="happy-bar" style="width: 80px; height: 10px; background: #ddd; border-radius: 5px; overflow: hidden; margin: 0 auto;">
+                    <div id="happy-fill" style="width: 100%; height: 100%; background: #ff66b3; transition: width 0.3s;"></div>
+                </div>
+                <span id="happy-val">100</span>%
+            </div>
+            <div style="text-align: center;">
+                <div style="width: 60px; height: 60px; background: #e6f7ff; border: 2px solid #b3d9ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2em;">⚡</div>
+                <p>Energy</p>
+                <div id="energy-bar" style="width: 80px; height: 10px; background: #ddd; border-radius: 5px; overflow: hidden; margin: 0 auto;">
+                    <div id="energy-fill" style="width: 100%; height: 100%; background: #66b3ff; transition: width 0.3s;"></div>
+                </div>
+                <span id="energy-val">100</span>%
+            </div>
+            <div style="text-align: center;">
+                <div style="width: 60px; height: 60px; background: #f0e6ff; border: 2px solid #d9b3ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2em;">✨</div>
+                <p>Clean</p>
+                <div id="clean-bar" style="width: 80px; height: 10px; background: #ddd; border-radius: 5px; overflow: hidden; margin: 0 auto;">
+                    <div id="clean-fill" style="width: 100%; height: 100%; background: #9966cc; transition: width 0.3s;"></div>
+                </div>
+                <span id="clean-val">100</span>%
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px;">
+            <button onclick="feedPet()" style="padding: 15px 20px; background: #fff2e6; border: 2px solid #ffd9b3; border-radius: 8px; cursor: pointer;">
+                🍖 Feed
             </button>
-            <button onclick="resetGame()" style="padding: 10px; background: #ff4444; border: 2px solid #cc0000; border-radius: 8px; cursor: pointer; color: white; margin-left: 10px;">
-                🗑️ Reset Game
+            <button onclick="playWithPet()" style="padding: 15px 20px; background: #ffe6f7; border: 2px solid #ffb3d9; border-radius: 8px; cursor: pointer;">
+                🎾 Play
             </button>
+            <button onclick="putPetToSleep()" style="padding: 15px 20px; background: #e6f7ff; border: 2px solid #b3d9ff; border-radius: 8px; cursor: pointer;">
+                😴 Sleep
+            </button>
+            <button onclick="cleanPet()" style="padding: 15px 20px; background: #f0e6ff; border: 2px solid #d9b3ff; border-radius: 8px; cursor: pointer;">
+                🛁 Clean
+            </button>
+            <button onclick="petTheDragon()" style="padding: 15px 20px; background: #fff8dc; border: 2px solid #daa520; border-radius: 8px; cursor: pointer;">
+                💕 Pet
+            </button>
+        </div>
+
+        <!-- Pet Info -->
+        <div style="text-align: center; margin-top: 20px; color: #999; font-size: 0.9em;">
+            <p>Age: <span id="pet-age">0</span> days | Stage: <span id="pet-stage">Egg</span> | Last visited: <span id="last-visit">Never</span></p>
+            <p id="time-since">Come back regularly to care for your dragon!</p>
         </div>
     </section>
 
@@ -548,6 +635,227 @@
                     updatePrestigeButton();
                 }
             }, 1000);
+        });
+
+        // ============================================
+        // DRAGON PET (TAMAGOTCHI-STYLE)
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Pet state
+            let pet = {
+                name: localStorage.getItem('petName') || 'Draco',
+                hunger: parseInt(localStorage.getItem('petHunger')) || 100,
+                happiness: parseInt(localStorage.getItem('petHappiness')) || 100,
+                energy: parseInt(localStorage.getItem('petEnergy')) || 100,
+                cleanliness: parseInt(localStorage.getItem('petClean')) || 100,
+                age: parseInt(localStorage.getItem('petAge')) || 0,
+                stage: localStorage.getItem('petStage') || 'egg',
+                hatched: localStorage.getItem('petHatched') === 'true',
+                lastVisit: parseInt(localStorage.getItem('petLastVisit')) || Date.now(),
+                createdAt: parseInt(localStorage.getItem('petCreatedAt')) || Date.now()
+            };
+
+            // Pet emojis by stage and mood
+            const petEmojis = {
+                egg: '🥚',
+                baby: { happy: '🐲', neutral: '🐉', sad: '😢', sleeping: '😴', hungry: '🍖', dirty: '💩' },
+                teen: { happy: '🐲', neutral: '🐉', sad: '😢', sleeping: '😴', hungry: '🍖', dirty: '💩' },
+                adult: { happy: '🐲', neutral: '🐉', sad: '😢', sleeping: '😴', hungry: '🍖', dirty: '💩' }
+            };
+
+            // Calculate time passed since last visit (in hours)
+            function getHoursPassed() {
+                return Math.floor((Date.now() - pet.lastVisit) / (1000 * 60 * 60));
+            }
+
+            // Update pet based on time passed
+            function updatePetFromTime() {
+                const hoursPassed = getHoursPassed();
+                
+                if (hoursPassed > 0) {
+                    // Decrease stats over time
+                    const hungerDrop = hoursPassed * 5;
+                    const happyDrop = hoursPassed * 3;
+                    const energyDrop = hoursPassed * 2;
+                    const cleanDrop = hoursPassed * 4;
+                    
+                    pet.hunger = Math.max(0, pet.hunger - hungerDrop);
+                    pet.happiness = Math.max(0, pet.happiness - happyDrop);
+                    pet.energy = Math.max(0, pet.energy - energyDrop);
+                    pet.cleanliness = Math.max(0, pet.cleanliness - cleanDrop);
+                    
+                    // Age the pet (1 day = 24 hours)
+                    pet.age = Math.floor((Date.now() - pet.createdAt) / (1000 * 60 * 60 * 24));
+                    
+                    // Check for hatching
+                    if (!pet.hatched && pet.age >= 1) {
+                        pet.hatched = true;
+                        pet.stage = 'baby';
+                        alert('🎉 Your egg hatched! You now have a baby dragon!');
+                    }
+                    
+                    // Evolution check
+                    if (pet.hatched) {
+                        if (pet.age >= 7) pet.stage = 'teen';
+                        if (pet.age >= 30) pet.stage = 'adult';
+                    }
+                    
+                    // Update last visit
+                    pet.lastVisit = Date.now();
+                    savePet();
+                }
+            }
+
+            // Save pet to localStorage
+            function savePet() {
+                localStorage.setItem('petName', pet.name);
+                localStorage.setItem('petHunger', pet.hunger);
+                localStorage.setItem('petHappiness', pet.happiness);
+                localStorage.setItem('petEnergy', pet.energy);
+                localStorage.setItem('petClean', pet.cleanliness);
+                localStorage.setItem('petAge', pet.age);
+                localStorage.setItem('petStage', pet.stage);
+                localStorage.setItem('petHatched', pet.hatched);
+                localStorage.setItem('petLastVisit', pet.lastVisit);
+                localStorage.setItem('petCreatedAt', pet.createdAt);
+            }
+
+            // Get pet emoji based on mood
+            function getPetEmoji() {
+                if (!pet.hatched) return '🥚';
+                
+                const mood = getMood();
+                return petEmojis[pet.stage][mood];
+            }
+
+            // Get pet mood
+            function getMood() {
+                if (pet.energy < 20) return 'sleeping';
+                if (pet.hunger < 20) return 'hungry';
+                if (pet.cleanliness < 20) return 'dirty';
+                if (pet.happiness < 30) return 'sad';
+                if (pet.happiness > 70) return 'happy';
+                return 'neutral';
+            }
+
+            // Get pet message
+            function getPetMessage() {
+                if (!pet.hatched) return 'Waiting to hatch...';
+                
+                const mood = getMood();
+                const messages = {
+                    happy: 'Your dragon is happy to see you! 🎉',
+                    neutral: 'Your dragon is chilling. 🐉',
+                    sad: 'Your dragon seems lonely... 💔',
+                    sleeping: 'Zzz... your dragon is sleeping. 😴',
+                    hungry: 'Your dragon is hungry! 🍖',
+                    dirty: 'Your dragon needs a bath! 🛁'
+                };
+                return messages[mood];
+            }
+
+            // Update display
+            function updatePetDisplay() {
+                document.getElementById('pet-display').innerHTML = getPetEmoji();
+                document.getElementById('pet-name').textContent = pet.hatched ? pet.name + ' (' + pet.stage + ')' : 'Your Dragon Egg';
+                document.getElementById('pet-message').textContent = getPetMessage();
+                
+                // Update bars
+                document.getElementById('hunger-fill').style.width = pet.hunger + '%';
+                document.getElementById('hunger-val').textContent = pet.hunger;
+                document.getElementById('happy-fill').style.width = pet.happiness + '%';
+                document.getElementById('happy-val').textContent = pet.happiness;
+                document.getElementById('energy-fill').style.width = pet.energy + '%';
+                document.getElementById('energy-val').textContent = pet.energy;
+                document.getElementById('clean-fill').style.width = pet.cleanliness + '%';
+                document.getElementById('clean-val').textContent = pet.cleanliness;
+                
+                // Update info
+                document.getElementById('pet-age').textContent = pet.age;
+                document.getElementById('pet-stage').textContent = pet.hatched ? pet.stage.charAt(0).toUpperCase() + pet.stage.slice(1) : 'Egg';
+                
+                const hoursSince = getHoursPassed();
+                if (hoursSince < 1) {
+                    document.getElementById('last-visit').textContent = 'Just now';
+                } else if (hoursSince < 24) {
+                    document.getElementById('last-visit').textContent = hoursSince + ' hours ago';
+                } else {
+                    document.getElementById('last-visit').textContent = Math.floor(hoursSince / 24) + ' days ago';
+                }
+                
+                // Time message
+                if (pet.hunger < 50 || pet.happiness < 50 || pet.cleanliness < 50) {
+                    document.getElementById('time-since').textContent = '⚠️ Your dragon needs attention!';
+                    document.getElementById('time-since').style.color = '#ff4444';
+                } else {
+                    document.getElementById('time-since').textContent = 'Come back regularly to care for your dragon!';
+                    document.getElementById('time-since').style.color = '#999';
+                }
+            }
+
+            // Pet actions
+            window.feedPet = function() {
+                if (!pet.hatched) { alert('Your egg hasn\'t hatched yet!'); return; }
+                if (pet.hunger >= 100) { alert('Your dragon is full!'); return; }
+                pet.hunger = Math.min(100, pet.hunger + 30);
+                pet.energy = Math.min(100, pet.energy + 5);
+                pet.lastVisit = Date.now();
+                savePet();
+                updatePetDisplay();
+                alert('🍖 Yum! Your dragon ate some food!');
+            };
+
+            window.playWithPet = function() {
+                if (!pet.hatched) { alert('Your egg hasn\'t hatched yet!'); return; }
+                if (pet.energy < 20) { alert('Your dragon is too tired to play!'); return; }
+                pet.happiness = Math.min(100, pet.happiness + 25);
+                pet.energy = Math.max(0, pet.energy - 15);
+                pet.hunger = Math.max(0, pet.hunger - 10);
+                pet.lastVisit = Date.now();
+                savePet();
+                updatePetDisplay();
+                alert('🎾 Yay! Your dragon had fun playing!');
+            };
+
+            window.putPetToSleep = function() {
+                if (!pet.hatched) { alert('Your egg hasn\'t hatched yet!'); return; }
+                pet.energy = Math.min(100, pet.energy + 40);
+                pet.hunger = Math.max(0, pet.hunger - 5);
+                pet.lastVisit = Date.now();
+                savePet();
+                updatePetDisplay();
+                alert('😴 Your dragon is now well-rested!');
+            };
+
+            window.cleanPet = function() {
+                if (!pet.hatched) { alert('Your egg hasn\'t hatched yet!'); return; }
+                pet.cleanliness = 100;
+                pet.happiness = Math.min(100, pet.happiness + 10);
+                pet.lastVisit = Date.now();
+                savePet();
+                updatePetDisplay();
+                alert('🛁 All clean! Your dragon sparkles!');
+            };
+
+            window.petTheDragon = function() {
+                if (!pet.hatched) { alert('Your egg hasn\'t hatched yet!'); return; }
+                pet.happiness = Math.min(100, pet.happiness + 15);
+                pet.lastVisit = Date.now();
+                savePet();
+                updatePetDisplay();
+                alert('💕 Your dragon loves you!');
+            };
+
+            // Initialize
+            updatePetFromTime();
+            updatePetDisplay();
+
+            // Update every minute (check for time-based changes)
+            setInterval(function() {
+                updatePetFromTime();
+                updatePetDisplay();
+            }, 60000);
         });
     </script>
 
