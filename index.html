@@ -127,23 +127,26 @@
 
     <section id="games">
         <h2>Board Games I play</h2>
-        <p>I play a lot of board games! Hear are some of my favourites!</p>
-        <ul>
-            <li><strong>Nemesis:</strong> An immersive alien style survival horror board game. Semi co-op where the aim is to complete your goal and escape the ship!</li>
-            <li><strong>Blood on the clocktower</strong> A social deduction party game where players take on the roles of townsfolk and demons and try to deduce each other's identities.</li>
-            <li><strong>Fiasco</strong>An improvisational party game where players create a story by assigning relationships, objects and locations to each others relaionships and acting out scenes</li>
-        </ul>
+        <p>I play a lot of board games! Here are some of my favourites!</p>
+        <div style="position: relative; max-width: 500px; margin: 20px auto; text-align: center;">
+            <button onclick="prevGame()" style="position: absolute; left: -40px; top: 50%; transform: translateY(-50%); font-size: 1.5em; background: #fff2e6; border: 2px solid #ffd9b3; border-radius: 50%; width: 40px; height: 40px; cursor: pointer;">◀</button>
+            <div id="game-carousel" style="min-height: 120px; padding: 20px; background: #fff2e6; border: 2px solid #ffd9b3; border-radius: 12px;">
+                <div id="game-content" style="font-size: 1.1em;"></div>
+            </div>
+            <button onclick="nextGame()" style="position: absolute; right: -40px; top: 50%; transform: translateY(-50%); font-size: 1.5em; background: #fff2e6; border: 2px solid #ffd9b3; border-radius: 50%; width: 40px; height: 40px; cursor: pointer;">▶</button>
+        </div>
     </section>
 
     <section id="songs">
         <h2>Favorite Songs</h2>
         <p>Here is what I am listening to this week!</p>
-        <ul>
-            <li>When somebody needs you - Will Wood</li>
-            <li>In a lake - Mitski</li>
-            <li>Knocking at the sky - The last dinner party</li>
-            <li>A cautionary Tale - Laufey</li>
-        </ul>
+        <div style="position: relative; max-width: 500px; margin: 20px auto; text-align: center;">
+            <button onclick="prevSong()" style="position: absolute; left: -40px; top: 50%; transform: translateY(-50%); font-size: 1.5em; background: #e6f7ff; border: 2px solid #b3d9ff; border-radius: 50%; width: 40px; height: 40px; cursor: pointer;">◀</button>
+            <div id="song-carousel" style="min-height: 120px; padding: 20px; background: #e6f7ff; border: 2px solid #b3d9ff; border-radius: 12px;">
+                <div id="song-content" style="font-size: 1.1em;"></div>
+            </div>
+            <button onclick="nextSong()" style="position: absolute; right: -40px; top: 50%; transform: translateY(-50%); font-size: 1.5em; background: #e6f7ff; border: 2px solid #b3d9ff; border-radius: 50%; width: 40px; height: 40px; cursor: pointer;">▶</button>
+        </div>
     </section>
 
     <div class="games-container">
@@ -151,11 +154,11 @@
         <h2>🐉 Dragon Clicker <span id="dragon-title" style="font-size: 0.5em;"></span></h2>
         <div style="text-align: center;">
             <p style="font-size: 1.2em;">Click the dragon to collect gold!</p>
-            <div style="position: relative; display: inline-block; width: 200px; height: 180px; margin: 20px auto;">
-                <div id="cosmetic-top" style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 1.5em; white-space: nowrap; min-width: 100px; text-align: center;"></div>
-                <div id="cosmetic-left" style="position: absolute; left: -35px; top: 50%; transform: translateY(-50%); font-size: 1.5em;"></div>
-                <div id="cosmetic-right" style="position: absolute; right: -35px; top: 50%; transform: translateY(-50%); font-size: 1.5em;"></div>
-                <div id="cosmetic-bottom" style="position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); font-size: 1.5em; white-space: nowrap; min-width: 100px; text-align: center;"></div>
+            <div style="position: relative; display: inline-block; width: 220px; height: 200px; margin: 20px auto;">
+                <div id="cosmetic-top" style="position: absolute; top: -35px; left: 50%; transform: translateX(-50%); font-size: 1.5em; white-space: nowrap; min-width: 100px; text-align: center;"></div>
+                <div id="cosmetic-left" style="position: absolute; left: -45px; top: 50%; transform: translateY(-50%); font-size: 1.5em;"></div>
+                <div id="cosmetic-right" style="position: absolute; right: -45px; top: 50%; transform: translateY(-50%); font-size: 1.5em;"></div>
+                <div id="cosmetic-bottom" style="position: absolute; bottom: -35px; left: 50%; transform: translateX(-50%); font-size: 1.5em; white-space: nowrap; min-width: 100px; text-align: center;"></div>
                 <div id="dragon-btn" style="font-size: 4em; cursor: pointer; user-select: none; display: inline-block; line-height: 1;">🐉</div>
             </div>
             <p style="font-size: 2em; color: #ff9933;">💰 <span id="gold-count">0</span></p>
@@ -654,6 +657,8 @@
                 localStorage.removeItem('dragonAchievements');
                 localStorage.removeItem('dragonPrestige');
                 localStorage.removeItem('dragonMultiplier');
+                localStorage.removeItem('dragonEvoStage');
+                localStorage.removeItem('dragonEvoClicks');
                 
                 location.reload();
             };
@@ -893,6 +898,41 @@
                 updatePetFromTime();
                 updatePetDisplay();
             }, 60000);
+
+            // Games carousel
+            const games = [
+                { title: 'Nemesis', desc: 'An immersive alien style survival horror board game. Semi co-op where the aim is to complete your goal and escape the ship!', emoji: '👽' },
+                { title: 'Blood on the Clocktower', desc: 'A social deduction party game where players take on the roles of townsfolk and demons and try to deduce each other\'s identities.', emoji: '🕰️' },
+                { title: 'Fiasco', desc: 'An improvisational party game where players create a story by assigning relationships, objects and locations to each others relationships and acting out scenes.', emoji: '🎭' },
+                { title: 'Gloomhaven', desc: 'A tactical combat dungeon crawler with persistent characters that evolve through a branching campaign.', emoji: '⚔️' },
+                { title: 'Spirit Island', desc: 'A complex cooperative game where players are spirits defending their island from colonizing invaders.', emoji: '🌋' }
+            ];
+            let gameIndex = 0;
+            function showGame() {
+                const g = games[gameIndex];
+                document.getElementById('game-content').innerHTML = '<div style="font-size: 2em;">' + g.emoji + '</div><strong>' + g.title + '</strong><p>' + g.desc + '</p><p style="color: #999; font-size: 0.8em;">' + (gameIndex + 1) + ' / ' + games.length + '</p>';
+            }
+            window.nextGame = function() { gameIndex = (gameIndex + 1) % games.length; showGame(); };
+            window.prevGame = function() { gameIndex = (gameIndex - 1 + games.length) % games.length; showGame(); };
+            showGame();
+
+            // Songs carousel
+            const songs = [
+                { title: 'When Somebody Needs You', artist: 'Will Wood', emoji: '🎵' },
+                { title: 'In a Lake', artist: 'Mitski', emoji: '🌊' },
+                { title: 'Knocking at the Sky', artist: 'The Last Dinner Party', emoji: '🌌' },
+                { title: 'A Cautionary Tale', artist: 'Laufey', emoji: '⚠️' },
+                { title: 'Die with a Smile', artist: 'Lady Gaga & Bruno Mars', emoji: '😊' },
+                { title: 'Birds of a Feather', artist: 'Billie Eilish', emoji: '🐦' }
+            ];
+            let songIndex = 0;
+            function showSong() {
+                const s = songs[songIndex];
+                document.getElementById('song-content').innerHTML = '<div style="font-size: 2em;">' + s.emoji + '</div><strong>' + s.title + '</strong><p>' + s.artist + '</p><p style="color: #999; font-size: 0.8em;">' + (songIndex + 1) + ' / ' + songs.length + '</p>';
+            }
+            window.nextSong = function() { songIndex = (songIndex + 1) % songs.length; showSong(); };
+            window.prevSong = function() { songIndex = (songIndex - 1 + songs.length) % songs.length; showSong(); };
+            showSong();
         });
     </script>
 
