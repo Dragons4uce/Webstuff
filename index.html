@@ -124,6 +124,22 @@
                 💎 Dragon Hoard (+25/sec) - 500💰
             </button>
         </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px; border-top: 1px dashed #b3d9ff; padding-top: 15px;">
+            <p style="width: 100%; text-align: center; color: #66b3ff; margin: 5px 0;">✨ Dragon Fashion ✨</p>
+            <button onclick="buyCosmetic('flower', 100)" style="padding: 10px; background: #fff0f5; border: 2px solid #ffb6c1; border-radius: 8px; cursor: pointer;">
+                🌸 Flower Crown - 100💰
+            </button>
+            <button onclick="buyCosmetic('hat', 500)" style="padding: 10px; background: #f5f5f5; border: 2px solid #a0a0a0; border-radius: 8px; cursor: pointer;">
+                🎩 Top Hat - 500💰
+            </button>
+            <button onclick="buyCosmetic('potion', 200)" style="padding: 10px; background: #fff8dc; border: 2px solid #daa520; border-radius: 8px; cursor: pointer;">
+                🪴 Potted Gold (+2/sec) - 200💰
+            </button>
+            <button onclick="buyCosmetic('ketchup', 99999)" style="padding: 10px; background: #ff0000; border: 2px solid #8b0000; border-radius: 8px; cursor: pointer; color: white;">
+                🍅 The Dragonsauce - 99,999💰
+            </button>
+        </div>
+        <div id="dragon-accessories" style="text-align: center; margin-top: 15px; font-size: 2em; min-height: 50px;"></div>
     </section>
 
     <section id="guestbook">
@@ -198,6 +214,61 @@
                     }
                     document.getElementById('gold-count').textContent = gold;
                     localStorage.setItem('dragonGold', gold);
+                } else {
+                    alert('Not enough gold! Keep clicking! 🐉');
+                }
+            };
+
+            // Cosmetic items
+            const cosmetics = {
+                flower: { emoji: '🌸', name: 'Flower Crown', bonus: 0 },
+                hat: { emoji: '🎩', name: 'Top Hat', bonus: 0 },
+                potion: { emoji: '🪴', name: 'Potted Gold', bonus: 2 },
+                ketchup: { emoji: '🍅', name: 'Ketchup of Dragonsauce', bonus: 100 }
+            };
+
+            // Load owned cosmetics
+            let ownedCosmetics = JSON.parse(localStorage.getItem('dragonCosmetics')) || [];
+            
+            // Apply passive bonus from cosmetics
+            ownedCosmetics.forEach(function(item) {
+                if (cosmetics[item] && cosmetics[item].bonus) {
+                    goldPerSecond += cosmetics[item].bonus;
+                }
+            });
+            document.getElementById('gps').textContent = goldPerSecond;
+
+            // Display cosmetics on dragon
+            function updateCosmetics() {
+                const container = document.getElementById('dragon-accessories');
+                container.innerHTML = ownedCosmetics.map(function(item) {
+                    return cosmetics[item] ? cosmetics[item].emoji : '';
+                }).join(' ');
+            }
+            updateCosmetics();
+
+            // Make buyCosmetic available globally
+            window.buyCosmetic = function(item, cost) {
+                if (ownedCosmetics.includes(item)) {
+                    alert('You already have this! 🐉');
+                    return;
+                }
+                if (gold >= cost) {
+                    gold -= cost;
+                    ownedCosmetics.push(item);
+                    localStorage.setItem('dragonCosmetics', JSON.stringify(ownedCosmetics));
+                    
+                    // Apply bonus
+                    if (cosmetics[item].bonus) {
+                        goldPerSecond += cosmetics[item].bonus;
+                        document.getElementById('gps').textContent = goldPerSecond;
+                        localStorage.setItem('dragonGPS', goldPerSecond);
+                    }
+                    
+                    document.getElementById('gold-count').textContent = gold;
+                    localStorage.setItem('dragonGold', gold);
+                    updateCosmetics();
+                    alert('You got ' + cosmetics[item].name + '! 🐉✨');
                 } else {
                     alert('Not enough gold! Keep clicking! 🐉');
                 }
