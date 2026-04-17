@@ -102,6 +102,30 @@
         </div>
     </section>
 
+    <section id="clicker-game">
+        <h2>🐉 Dragon Clicker</h2>
+        <div style="text-align: center;">
+            <p style="font-size: 1.2em;">Click the dragon to collect gold!</p>
+            <div id="dragon-btn" style="font-size: 4em; cursor: pointer; user-select: none; transition: transform 0.1s; display: inline-block;" onclick="clickDragon()">🐉</div>
+            <p style="font-size: 2em; color: #ff9933;">💰 <span id="gold-count">0</span></p>
+            <p style="color: #999;">Gold per click: <span id="gpc">1</span> | Gold per second: <span id="gps">0</span></p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px;">
+            <button onclick="buyUpgrade('click', 10, 1)" style="padding: 10px; background: #fff2e6; border: 2px solid #ffd9b3; border-radius: 8px; cursor: pointer;">
+                🖱️ Better Clicks (+1/click) - 10💰
+            </button>
+            <button onclick="buyUpgrade('auto', 50, 1)" style="padding: 10px; background: #e6f7ff; border: 2px solid #b3d9ff; border-radius: 8px; cursor: pointer;">
+                🐾 Baby Dragon (+1/sec) - 50💰
+            </button>
+            <button onclick="buyUpgrade('gold', 100, 5)" style="padding: 10px; background: #ffe6f7; border: 2px solid #ffb3d9; border-radius: 8px; cursor: pointer;">
+                ✨ Golden Scales (+5/sec) - 100💰
+            </button>
+            <button onclick="buyUpgrade('hoard', 500, 25)" style="padding: 10px; background: #f0e6ff; border: 2px solid #d9b3ff; border-radius: 8px; cursor: pointer;">
+                💎 Dragon Hoard (+25/sec) - 500💰
+            </button>
+        </div>
+    </section>
+
     <section id="guestbook">
         <h2>💌 Guestbook</h2>
         <p style="text-align: center; color: #999;">Leave a message for Dragon_s4uce!</p>
@@ -134,6 +158,47 @@
             document.getElementById('footer-count').textContent = count;
         }
         updateVisitorCounter();
+
+        // Dragon Clicker Game
+        let gold = 0;
+        let goldPerClick = 1;
+        let goldPerSecond = 0;
+
+        function clickDragon() {
+            gold += goldPerClick;
+            updateDisplay();
+            const dragon = document.getElementById('dragon-btn');
+            dragon.style.transform = 'scale(1.2)';
+            setTimeout(() => dragon.style.transform = 'scale(1)', 100);
+        }
+
+        function buyUpgrade(type, cost, bonus) {
+            if (gold >= cost) {
+                gold -= cost;
+                if (type === 'click') {
+                    goldPerClick += bonus;
+                    document.getElementById('gpc').textContent = goldPerClick;
+                } else {
+                    goldPerSecond += bonus;
+                    document.getElementById('gps').textContent = goldPerSecond;
+                }
+                updateDisplay();
+            } else {
+                alert('Not enough gold! Keep clicking! 🐉');
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById('gold-count').textContent = gold;
+        }
+
+        // Auto-gold every second
+        setInterval(() => {
+            if (goldPerSecond > 0) {
+                gold += goldPerSecond;
+                updateDisplay();
+            }
+        }, 1000);
     </script>
 
     <footer style="text-align: center; margin-top: 20px; color: #999;">
