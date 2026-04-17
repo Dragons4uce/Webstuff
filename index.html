@@ -106,7 +106,7 @@
         <h2>🐉 Dragon Clicker</h2>
         <div style="text-align: center;">
             <p style="font-size: 1.2em;">Click the dragon to collect gold!</p>
-            <div id="dragon-btn" style="font-size: 4em; cursor: pointer; user-select: none; transition: transform 0.1s; display: inline-block;" onclick="clickDragon()">🐉</div>
+            <div id="dragon-btn" style="font-size: 4em; cursor: pointer; user-select: none; transition: transform 0.1s; display: inline-block;">🐉</div>
             <p style="font-size: 2em; color: #ff9933;">💰 <span id="gold-count">0</span></p>
             <p style="color: #999;">Gold per click: <span id="gpc">1</span> | Gold per second: <span id="gps">0</span></p>
         </div>
@@ -160,17 +160,22 @@
         updateVisitorCounter();
 
         // Dragon Clicker Game
-        let gold = 0;
-        let goldPerClick = 1;
-        let goldPerSecond = 0;
+        let gold = parseInt(localStorage.getItem('dragonGold')) || 0;
+        let goldPerClick = parseInt(localStorage.getItem('dragonGPC')) || 1;
+        let goldPerSecond = parseInt(localStorage.getItem('dragonGPS')) || 0;
 
-        function clickDragon() {
+        // Update initial display
+        document.getElementById('gold-count').textContent = gold;
+        document.getElementById('gpc').textContent = goldPerClick;
+        document.getElementById('gps').textContent = goldPerSecond;
+
+        // Click handler
+        document.getElementById('dragon-btn').addEventListener('click', function() {
             gold += goldPerClick;
             updateDisplay();
-            const dragon = document.getElementById('dragon-btn');
-            dragon.style.transform = 'scale(1.2)';
-            setTimeout(() => dragon.style.transform = 'scale(1)', 100);
-        }
+            this.style.transform = 'scale(1.2)';
+            setTimeout(() => this.style.transform = 'scale(1)', 100);
+        });
 
         function buyUpgrade(type, cost, bonus) {
             if (gold >= cost) {
@@ -178,9 +183,11 @@
                 if (type === 'click') {
                     goldPerClick += bonus;
                     document.getElementById('gpc').textContent = goldPerClick;
+                    localStorage.setItem('dragonGPC', goldPerClick);
                 } else {
                     goldPerSecond += bonus;
                     document.getElementById('gps').textContent = goldPerSecond;
+                    localStorage.setItem('dragonGPS', goldPerSecond);
                 }
                 updateDisplay();
             } else {
@@ -190,6 +197,7 @@
 
         function updateDisplay() {
             document.getElementById('gold-count').textContent = gold;
+            localStorage.setItem('dragonGold', gold);
         }
 
         // Auto-gold every second
