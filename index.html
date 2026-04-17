@@ -161,96 +161,99 @@
             <p style="font-size: 2em; color: #ff9933;">💰 <span id="gold-count">0</span></p>
             <p style="color: #999;">Gold per click: <span id="gpc">1</span> | Gold per second: <span id="gps">0</span> | Multiplier: x<span id="multiplier">1</span></p>
         </div>
-        <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px;">
-            <button onclick="buyUpgrade('click', 10, 1)" style="padding: 10px; background: #fff2e6; border: 2px solid #ffd9b3; border-radius: 8px; cursor: pointer;">
-                🖱️ Better Clicks (+1/click) - 10💰
+        
+        <!-- UPGRADES - Give you more gold -->
+        <p style="width: 100%; text-align: center; color: #66b3ff; margin: 20px 0 10px 0; font-weight: bold;">💰 Upgrades (Earn More Gold)</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+            <button onclick="buyUpgrade('click', 50, 1)" style="padding: 10px; background: #fff2e6; border: 2px solid #ffd9b3; border-radius: 8px; cursor: pointer;">
+                🖱️ Better Clicks (+1/click) - 50💰
             </button>
-            <button onclick="buyUpgrade('auto', 50, 1)" style="padding: 10px; background: #e6f7ff; border: 2px solid #b3d9ff; border-radius: 8px; cursor: pointer;">
-                🐾 Baby Dragon (+1/sec) - 50💰
+            <button onclick="buyUpgrade('auto', 200, 1)" style="padding: 10px; background: #e6f7ff; border: 2px solid #b3d9ff; border-radius: 8px; cursor: pointer;">
+                🐾 Baby Dragon (+1/sec) - 200💰
             </button>
-            <button onclick="buyUpgrade('gold', 100, 5)" style="padding: 10px; background: #ffe6f7; border: 2px solid #ffb3d9; border-radius: 8px; cursor: pointer;">
-                ✨ Golden Scales (+5/sec) - 100💰
+            <button onclick="buyUpgrade('gold', 500, 5)" style="padding: 10px; background: #ffe6f7; border: 2px solid #ffb3d9; border-radius: 8px; cursor: pointer;">
+                ✨ Golden Scales (+5/sec) - 500💰
             </button>
-            <button onclick="buyUpgrade('hoard', 500, 25)" style="padding: 10px; background: #f0e6ff; border: 2px solid #d9b3ff; border-radius: 8px; cursor: pointer;">
-                💎 Dragon Hoard (+25/sec) - 500💰
+            <button onclick="buyUpgrade('hoard', 2000, 25)" style="padding: 10px; background: #f0e6ff; border: 2px solid #d9b3ff; border-radius: 8px; cursor: pointer;">
+                💎 Dragon Hoard (+25/sec) - 2,000💰
             </button>
-            <button onclick="buyUpgrade('mine', 1000, 50)" style="padding: 10px; background: #4a4a4a; border: 2px solid #2a2a2a; border-radius: 8px; cursor: pointer; color: white;">
-                ⛏️ Gold Mine (+50/sec) - 1,000💰
+            <button onclick="buyUpgrade('mine', 5000, 50)" style="padding: 10px; background: #4a4a4a; border: 2px solid #2a2a2a; border-radius: 8px; cursor: pointer; color: white;">
+                ⛏️ Gold Mine (+50/sec) - 5,000💰
             </button>
-            <button onclick="buyUpgrade('vault', 2500, 100)" style="padding: 10px; background: #8b4513; border: 2px solid #5c2e0a; border-radius: 8px; cursor: pointer; color: white;">
-                🏦 Dragon Vault (+100/sec) - 2,500💰
+            <button onclick="buyUpgrade('vault', 15000, 100)" style="padding: 10px; background: #8b4513; border: 2px solid #5c2e0a; border-radius: 8px; cursor: pointer; color: white;">
+                🏦 Dragon Vault (+100/sec) - 15,000💰
             </button>
-            <button onclick="buyUpgrade('bank', 5000, 200)" style="padding: 10px; background: #1a1a4a; border: 2px solid #0a0a2a; border-radius: 8px; cursor: pointer; color: white;">
-                🏛️ Ancient Bank (+200/sec) - 5,000💰
+            <button onclick="buyUpgrade('bank', 35000, 200)" style="padding: 10px; background: #1a1a4a; border: 2px solid #0a0a2a; border-radius: 8px; cursor: pointer; color: white;">
+                🏛️ Ancient Bank (+200/sec) - 35,000💰
             </button>
-            <button onclick="buyUpgrade('treasury', 10000, 500)" style="padding: 10px; background: #ffd700; border: 2px solid #b8860b; border-radius: 8px; cursor: pointer;">
-                💰 Royal Treasury (+500/sec) - 10,000💰
+            <button onclick="buyUpgrade('treasury', 75000, 500)" style="padding: 10px; background: #ffd700; border: 2px solid #b8860b; border-radius: 8px; cursor: pointer;">
+                💰 Royal Treasury (+500/sec) - 75,000💰
             </button>
-            <button onclick="buyUpgrade('fortress', 25000, 1000)" style="padding: 10px; background: #8b0000; border: 2px solid #5c0000; border-radius: 8px; cursor: pointer; color: white;">
-                🏰 Gold Fortress (+1,000/sec) - 25,000💰
+            <button onclick="buyUpgrade('fortress', 200000, 1000)" style="padding: 10px; background: #8b0000; border: 2px solid #5c0000; border-radius: 8px; cursor: pointer; color: white;">
+                🏰 Gold Fortress (+1,000/sec) - 200,000💰
             </button>
-            <button onclick="buyUpgrade('kingdom', 50000, 2500)" style="padding: 10px; background: linear-gradient(45deg, #ffd700, #ff69b4); border: 2px solid #ff1493; border-radius: 8px; cursor: pointer;">
-                👑 Dragon Kingdom (+2,500/sec) - 50,000💰
+            <button onclick="buyUpgrade('kingdom', 500000, 2500)" style="padding: 10px; background: linear-gradient(45deg, #ffd700, #ff69b4); border: 2px solid #ff1493; border-radius: 8px; cursor: pointer;">
+                👑 Dragon Kingdom (+2,500/sec) - 500,000💰
+            </button>
+            <button onclick="buyUpgrade('empire', 1000000, 5000)" style="padding: 10px; background: linear-gradient(45deg, #4b0082, #ff1493); border: 2px solid #ff00ff; border-radius: 8px; cursor: pointer; color: white;">
+                🌍 Dragon Empire (+5,000/sec) - 1,000,000💰
             </button>
         </div>
-        <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px; border-top: 1px dashed #b3d9ff; padding-top: 15px;">
-            <p style="width: 100%; text-align: center; color: #66b3ff; margin: 5px 0;">✨ Dragon Fashion ✨</p>
-            <button onclick="buyCosmetic('flower', 100)" style="padding: 10px; background: #fff0f5; border: 2px solid #ffb6c1; border-radius: 8px; cursor: pointer;">
-                🌸 Flower Crown - 100💰
+        
+        <!-- COSMETICS - Just for looks -->
+        <p style="width: 100%; text-align: center; color: #ff66b3; margin: 20px 0 10px 0; font-weight: bold;">✨ Dragon Fashion (Purely Cosmetic)</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+            <button onclick="buyCosmetic('flower', 500)" style="padding: 10px; background: #fff0f5; border: 2px solid #ffb6c1; border-radius: 8px; cursor: pointer;">
+                🌸 Flower Crown - 500💰
             </button>
-            <button onclick="buyCosmetic('hat', 500)" style="padding: 10px; background: #f5f5f5; border: 2px solid #a0a0a0; border-radius: 8px; cursor: pointer;">
-                🎩 Top Hat - 500💰
+            <button onclick="buyCosmetic('glasses', 750)" style="padding: 10px; background: #e0ffff; border: 2px solid #87ceeb; border-radius: 8px; cursor: pointer;">
+                👓 Cool Glasses - 750💰
             </button>
-            <button onclick="buyCosmetic('crown', 1000)" style="padding: 10px; background: #ffd700; border: 2px solid #daa520; border-radius: 8px; cursor: pointer;">
-                👑 Royal Crown - 1,000💰
+            <button onclick="buyCosmetic('bow', 1500)" style="padding: 10px; background: #ffb6c1; border: 2px solid #ff69b4; border-radius: 8px; cursor: pointer;">
+                🎀 Cute Bow - 1,500💰
             </button>
-            <button onclick="buyCosmetic('glasses', 300)" style="padding: 10px; background: #e0ffff; border: 2px solid #87ceeb; border-radius: 8px; cursor: pointer;">
-                👓 Cool Glasses - 300💰
+            <button onclick="buyCosmetic('hat', 2000)" style="padding: 10px; background: #f5f5f5; border: 2px solid #a0a0a0; border-radius: 8px; cursor: pointer;">
+                🎩 Top Hat - 2,000💰
             </button>
-            <button onclick="buyCosmetic('bow', 750)" style="padding: 10px; background: #ffb6c1; border: 2px solid #ff69b4; border-radius: 8px; cursor: pointer;">
-                🎀 Cute Bow - 750💰
+            <button onclick="buyCosmetic('crown', 5000)" style="padding: 10px; background: #ffd700; border: 2px solid #daa520; border-radius: 8px; cursor: pointer;">
+                👑 Royal Crown - 5,000💰
             </button>
-            <button onclick="buyCosmetic('scarf', 1500)" style="padding: 10px; background: #ff6347; border: 2px solid #dc143c; border-radius: 8px; cursor: pointer;">
-                🧣 Cozy Scarf - 1,500💰
+            <button onclick="buyCosmetic('scarf', 7500)" style="padding: 10px; background: #ff6347; border: 2px solid #dc143c; border-radius: 8px; cursor: pointer;">
+                🧣 Cozy Scarf - 7,500💰
             </button>
-            <button onclick="buyCosmetic('wings', 2500)" style="padding: 10px; background: #e6e6fa; border: 2px solid #9370db; border-radius: 8px; cursor: pointer;">
-                🦋 Fairy Wings - 2,500💰
+            <button onclick="buyCosmetic('wings', 10000)" style="padding: 10px; background: #e6e6fa; border: 2px solid #9370db; border-radius: 8px; cursor: pointer;">
+                🦋 Fairy Wings - 10,000💰
             </button>
-            <button onclick="buyCosmetic('potion', 200)" style="padding: 10px; background: #fff8dc; border: 2px solid #daa520; border-radius: 8px; cursor: pointer;">
-                🪴 Potted Gold (+2/sec) - 200💰
+            <button onclick="buyCosmetic('cape', 15000)" style="padding: 10px; background: #dc143c; border: 2px solid #8b0000; border-radius: 8px; cursor: pointer; color: white;">
+                🦸 Hero Cape - 15,000💰
             </button>
-            <button onclick="buyCosmetic('ketchup', 99999)" style="padding: 10px; background: #ff0000; border: 2px solid #8b0000; border-radius: 8px; cursor: pointer; color: white;">
-                🍅 The Dragonsauce - 99,999💰
+            <button onclick="buyCosmetic('halo', 25000)" style="padding: 10px; background: #fffacd; border: 2px solid #ffd700; border-radius: 8px; cursor: pointer;">
+                😇 Holy Halo - 25,000💰
             </button>
-            <button onclick="buyCosmetic('shield', 800)" style="padding: 10px; background: #f0f8ff; border: 2px solid #4682b4; border-radius: 8px; cursor: pointer;">
-                🛡️ Golden Shield (+5/sec) - 800💰
+            <button onclick="buyCosmetic('sword', 35000)" style="padding: 10px; background: #c0c0c0; border: 2px solid #808080; border-radius: 8px; cursor: pointer;">
+                ⚔️ Dragon Sword - 35,000💰
             </button>
-            <button onclick="buyCosmetic('staff', 2000)" style="padding: 10px; background: #4b0082; border: 2px solid #9400d3; border-radius: 8px; cursor: pointer; color: white;">
-                🪄 Magic Staff (+10/sec) - 2,000💰
+            <button onclick="buyCosmetic('orb', 50000)" style="padding: 10px; background: #4a0080; border: 2px solid #8b0080; border-radius: 8px; cursor: pointer; color: white;">
+                🔮 Magic Orb - 50,000💰
             </button>
-            <button onclick="buyCosmetic('halo', 5000)" style="padding: 10px; background: #fffacd; border: 2px solid #ffd700; border-radius: 8px; cursor: pointer;">
-                😇 Holy Halo (+25/sec) - 5,000💰
+            <button onclick="buyCosmetic('staff', 75000)" style="padding: 10px; background: #4b0082; border: 2px solid #9400d3; border-radius: 8px; cursor: pointer; color: white;">
+                🪄 Magic Staff - 75,000💰
             </button>
-            <button onclick="buyCosmetic('cape', 3000)" style="padding: 10px; background: #dc143c; border: 2px solid #8b0000; border-radius: 8px; cursor: pointer; color: white;">
-                🦸 Hero Cape (+15/sec) - 3,000💰
+            <button onclick="buyCosmetic('crown_glow', 100000)" style="padding: 10px; background: linear-gradient(45deg, #ffd700, #ff69b4); border: 2px solid #ff1493; border-radius: 8px; cursor: pointer;">
+                🌟 Glowing Crown - 100,000💰
             </button>
-            <button onclick="buyCosmetic('sword', 4000)" style="padding: 10px; background: #c0c0c0; border: 2px solid #808080; border-radius: 8px; cursor: pointer;">
-                ⚔️ Dragon Sword (+20/sec) - 4,000💰
+            <button onclick="buyCosmetic('aura', 150000)" style="padding: 10px; background: linear-gradient(45deg, #00ff00, #00ffff); border: 2px solid #00ced1; border-radius: 8px; cursor: pointer;">
+                ✨ Dragon Aura - 150,000💰
             </button>
-            <button onclick="buyCosmetic('orb', 6000)" style="padding: 10px; background: #4a0080; border: 2px solid #8b0080; border-radius: 8px; cursor: pointer; color: white;">
-                🔮 Magic Orb (+30/sec) - 6,000💰
+            <button onclick="buyCosmetic('throne', 250000)" style="padding: 10px; background: #8b4513; border: 2px solid #daa520; border-radius: 8px; cursor: pointer; color: white;">
+                🪑 Mini Throne - 250,000💰
             </button>
-            <button onclick="buyCosmetic('crown_glow', 8000)" style="padding: 10px; background: linear-gradient(45deg, #ffd700, #ff69b4); border: 2px solid #ff1493; border-radius: 8px; cursor: pointer;">
-                🌟 Glowing Crown (+40/sec) - 8,000💰
+            <button onclick="buyCosmetic('rainbow', 500000)" style="padding: 10px; background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); border: 2px solid #ff00ff; border-radius: 8px; cursor: pointer;">
+                🌈 Rainbow Sparkles - 500,000💰
             </button>
-            <button onclick="buyCosmetic('aura', 12000)" style="padding: 10px; background: linear-gradient(45deg, #00ff00, #00ffff); border: 2px solid #00ced1; border-radius: 8px; cursor: pointer;">
-                ✨ Dragon Aura (+50/sec) - 12,000💰
+            <button onclick="buyCosmetic('ketchup', 9999999)" style="padding: 10px; background: #ff0000; border: 2px solid #8b0000; border-radius: 8px; cursor: pointer; color: white;">
+                🍅 The Dragonsauce - 9,999,999💰
             </button>
-            <button onclick="buyCosmetic('throne', 20000)" style="padding: 10px; background: #8b4513; border: 2px solid #daa520; border-radius: 8px; cursor: pointer; color: white;">
-               ️ Mini Throne (+75/sec) - 20,000💰
-            </button>
-            <button onclick="buyCosmetic('rainbow', 30000)" style="padding: 10px; background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); border: 2px solid #ff00ff; border-radius: 8px; cursor: pointer;">
-                🌈 Rainbow Sparkles (+100/sec) - 30,000💰
         </div>
         <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px; border-top: 1px dashed #b3d9ff; padding-top: 15px;">
             <p style="width: 100%; text-align: center; color: #ff66b3; margin: 5px 0;">🏆 Achievements</p>
@@ -465,40 +468,30 @@
                 }
             };
 
-            // Cosmetic items with positions
+            // Cosmetic items with positions (PURELY COSMETIC - no bonuses)
             const cosmetics = {
-                flower: { emoji: '🌸', name: 'Flower Crown', bonus: 0, pos: 'top' },
-                hat: { emoji: '🎩', name: 'Top Hat', bonus: 0, pos: 'top' },
-                crown: { emoji: '👑', name: 'Royal Crown', bonus: 0, pos: 'top' },
-                glasses: { emoji: '👓', name: 'Cool Glasses', bonus: 0, pos: 'top' },
-                bow: { emoji: '🎀', name: 'Cute Bow', bonus: 0, pos: 'top' },
-                scarf: { emoji: '🧣', name: 'Cozy Scarf', bonus: 0, pos: 'bottom' },
-                wings: { emoji: '🧚', name: 'Fairy Wings', bonus: 0, pos: 'left' },
-                potion: { emoji: '🪴', name: 'Potted Gold', bonus: 2, pos: 'right' },
-                ketchup: { emoji: '🍅', name: 'The Dragonsauce', bonus: 100, pos: 'right' },
-                shield: { emoji: '🛡️', name: 'Golden Shield', bonus: 5, pos: 'left' },
-                staff: { emoji: '🪄', name: 'Magic Staff', bonus: 10, pos: 'right' },
-                halo: { emoji: '😇', name: 'Holy Halo', bonus: 25, pos: 'top' },
-                cape: { emoji: '🦸', name: 'Hero Cape', bonus: 15, pos: 'bottom' },
-                sword: { emoji: '⚔️', name: 'Dragon Sword', bonus: 20, pos: 'right' },
-                orb: { emoji: '🔮', name: 'Magic Orb', bonus: 30, pos: 'right' },
-                crown_glow: { emoji: '🌟', name: 'Glowing Crown', bonus: 40, pos: 'top' },
-                aura: { emoji: '✨', name: 'Dragon Aura', bonus: 50, pos: 'left' },
-                throne: { emoji: '🪑', name: 'Mini Throne', bonus: 75, pos: 'bottom' },
-                rainbow: { emoji: '🌈', name: 'Rainbow Sparkles', bonus: 100, pos: 'top' }
+                flower: { emoji: '🌸', name: 'Flower Crown', pos: 'top' },
+                glasses: { emoji: '👓', name: 'Cool Glasses', pos: 'top' },
+                bow: { emoji: '🎀', name: 'Cute Bow', pos: 'top' },
+                hat: { emoji: '🎩', name: 'Top Hat', pos: 'top' },
+                crown: { emoji: '👑', name: 'Royal Crown', pos: 'top' },
+                scarf: { emoji: '🧣', name: 'Cozy Scarf', pos: 'bottom' },
+                wings: { emoji: '🧚', name: 'Fairy Wings', pos: 'left' },
+                cape: { emoji: '🦸', name: 'Hero Cape', pos: 'bottom' },
+                halo: { emoji: '😇', name: 'Holy Halo', pos: 'top' },
+                sword: { emoji: '⚔️', name: 'Dragon Sword', pos: 'right' },
+                orb: { emoji: '🔮', name: 'Magic Orb', pos: 'right' },
+                staff: { emoji: '🪄', name: 'Magic Staff', pos: 'right' },
+                crown_glow: { emoji: '🌟', name: 'Glowing Crown', pos: 'top' },
+                aura: { emoji: '✨', name: 'Dragon Aura', pos: 'left' },
+                throne: { emoji: '🪑', name: 'Mini Throne', pos: 'bottom' },
+                rainbow: { emoji: '🌈', name: 'Rainbow Sparkles', pos: 'top' },
+                ketchup: { emoji: '🍅', name: 'The Dragonsauce', pos: 'right' }
             };
 
             // Load owned cosmetics
             let ownedCosmetics = JSON.parse(localStorage.getItem('dragonCosmetics')) || [];
             
-            // Apply passive bonus from cosmetics
-            ownedCosmetics.forEach(function(item) {
-                if (cosmetics[item] && cosmetics[item].bonus) {
-                    goldPerSecond += cosmetics[item].bonus;
-                }
-            });
-            document.getElementById('gps').textContent = getEffectiveGPS();
-
             // Display cosmetics around dragon
             function updateCosmetics() {
                 const positions = { top: '', left: '', right: '', bottom: '' };
@@ -514,7 +507,7 @@
             }
             updateCosmetics();
 
-            // Make buyCosmetic available globally
+            // Make buyCosmetic available globally (purely cosmetic - no bonuses)
             window.buyCosmetic = function(item, cost) {
                 if (ownedCosmetics.includes(item)) {
                     alert('You already have this! 🐉');
@@ -524,13 +517,6 @@
                     gold -= cost;
                     ownedCosmetics.push(item);
                     localStorage.setItem('dragonCosmetics', JSON.stringify(ownedCosmetics));
-                    
-                    // Apply bonus
-                    if (cosmetics[item].bonus) {
-                        goldPerSecond += cosmetics[item].bonus;
-                        document.getElementById('gps').textContent = getEffectiveGPS();
-                        localStorage.setItem('dragonGPS', goldPerSecond);
-                    }
                     
                     document.getElementById('gold-count').textContent = gold;
                     localStorage.setItem('dragonGold', gold);
