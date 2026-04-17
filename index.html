@@ -151,12 +151,12 @@
         <h2>🐉 Dragon Clicker <span id="dragon-title" style="font-size: 0.5em;"></span></h2>
         <div style="text-align: center;">
             <p style="font-size: 1.2em;">Click the dragon to collect gold!</p>
-            <div style="position: relative; display: inline-block; width: 150px; height: 150px; margin: 20px;">
-                <div id="cosmetic-top" style="position: absolute; top: -30px; left: 50%; transform: translateX(-50%); font-size: 1.8em; white-space: nowrap;"></div>
-                <div id="cosmetic-left" style="position: absolute; left: -40px; top: 50%; transform: translateY(-50%); font-size: 1.8em;"></div>
-                <div id="cosmetic-right" style="position: absolute; right: -40px; top: 50%; transform: translateY(-50%); font-size: 1.8em;"></div>
-                <div id="cosmetic-bottom" style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); font-size: 1.8em; white-space: nowrap;"></div>
-                <div id="dragon-btn" style="font-size: 4em; cursor: pointer; user-select: none; transition: transform 0.1s; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">🐉</div>
+            <div style="position: relative; display: inline-block; width: 200px; height: 180px; margin: 20px auto;">
+                <div id="cosmetic-top" style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 1.5em; white-space: nowrap; min-width: 100px; text-align: center;"></div>
+                <div id="cosmetic-left" style="position: absolute; left: -35px; top: 50%; transform: translateY(-50%); font-size: 1.5em;"></div>
+                <div id="cosmetic-right" style="position: absolute; right: -35px; top: 50%; transform: translateY(-50%); font-size: 1.5em;"></div>
+                <div id="cosmetic-bottom" style="position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); font-size: 1.5em; white-space: nowrap; min-width: 100px; text-align: center;"></div>
+                <div id="dragon-btn" style="font-size: 4em; cursor: pointer; user-select: none; display: inline-block; line-height: 1;">🐉</div>
             </div>
             <p style="font-size: 2em; color: #ff9933;">💰 <span id="gold-count">0</span></p>
             <p style="color: #999;">Gold per click: <span id="gpc">1</span> | Gold per second: <span id="gps">0</span> | Multiplier: x<span id="multiplier">1</span></p>
@@ -397,13 +397,15 @@
             let totalGoldEarned = parseInt(localStorage.getItem('dragonTotalGold')) || 0;
             let achievements = JSON.parse(localStorage.getItem('dragonAchievements')) || [];
 
-            // Evolution stages
+            // Evolution stages - based on total gold earned
             const evolutions = [
-                { min: 0, name: 'Baby Dragon', emoji: '🐉' },
-                { min: 1000, name: 'Young Dragon', emoji: '🐲' },
-                { min: 10000, name: 'Adult Dragon', emoji: '🔥' },
-                { min: 100000, name: 'Ancient Dragon', emoji: '🐛' },
-                { min: 1000000, name: 'Legendary Dragon', emoji: '🌟' }
+                { min: 0, name: 'Egg', emoji: '🥚' },
+                { min: 1, name: 'Hatchling', emoji: '🐣' },
+                { min: 100, name: 'Baby Dragon', emoji: '🐲' },
+                { min: 1000, name: 'Young Dragon', emoji: '🦎' },
+                { min: 10000, name: 'Adult Dragon', emoji: '🐉' },
+                { min: 100000, name: 'Elder Dragon', emoji: '🦄' },
+                { min: 1000000, name: 'Ancient One', emoji: '👑' }
             ];
 
             // Get current evolution
@@ -440,10 +442,6 @@
                 document.getElementById('gold-count').textContent = gold;
                 localStorage.setItem('dragonGold', gold);
                 localStorage.setItem('dragonTotalGold', totalGoldEarned);
-                dragonBtn.style.transform = 'scale(1.2)';
-                setTimeout(function() {
-                    dragonBtn.style.transform = 'scale(1)';
-                }, 100);
                 checkAchievements();
                 updateEvolution();
             };
