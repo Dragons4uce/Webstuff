@@ -121,67 +121,67 @@
         </div>
         <div id="event-display" style="text-align: center; padding: 10px; margin: 10px 0; border-radius: 8px; display: none; background: linear-gradient(90deg, #ffeaa7, #fdcb6e);"></div>
         <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px;">
-            <button onclick="buyUpgrade('click', 10, 1)" style="padding: 10px; background: #fff2e6; border: 2px solid #ffd9b3; border-radius: 8px; cursor: pointer;">
+            <button onclick="buyUpgrade('click', 1)" style="padding: 10px; background: #fff2e6; border: 2px solid #ffd9b3; border-radius: 8px; cursor: pointer;">
                 🖱️ Better Clicks (+1/click) - <span id="cost-click">10</span>💰
             </button>
-            <button onclick="buyUpgrade('auto', 50, 1)" style="padding: 10px; background: #e6f7ff; border: 2px solid #b3d9ff; border-radius: 8px; cursor: pointer;">
+            <button onclick="buyUpgrade('auto', 1)" style="padding: 10px; background: #e6f7ff; border: 2px solid #b3d9ff; border-radius: 8px; cursor: pointer;">
                 🐾 Baby Dragon (+1/sec) - <span id="cost-auto">50</span>💰
             </button>
-            <button onclick="buyUpgrade('gold', 100, 5)" style="padding: 10px; background: #ffe6f7; border: 2px solid #ffb3d9; border-radius: 8px; cursor: pointer;">
+            <button onclick="buyUpgrade('gold', 5)" style="padding: 10px; background: #ffe6f7; border: 2px solid #ffb3d9; border-radius: 8px; cursor: pointer;">
                 ✨ Golden Scales (+5/sec) - <span id="cost-gold">100</span>💰
             </button>
-            <button onclick="buyUpgrade('hoard', 500, 25)" style="padding: 10px; background: #f0e6ff; border: 2px solid #d9b3ff; border-radius: 8px; cursor: pointer;">
+            <button onclick="buyUpgrade('hoard', 25)" style="padding: 10px; background: #f0e6ff; border: 2px solid #d9b3ff; border-radius: 8px; cursor: pointer;">
                 💎 Dragon Hoard (+25/sec) - <span id="cost-hoard">500</span>💰
             </button>
-            <button onclick="buyUpgrade('castle', 5000, 100)" style="padding: 10px; background: #ffe4e1; border: 2px solid #ffb6c1; border-radius: 8px; cursor: pointer;">
+            <button onclick="buyUpgrade('castle', 100)" style="padding: 10px; background: #ffe4e1; border: 2px solid #ffb6c1; border-radius: 8px; cursor: pointer;">
                 🏰 Dragon Castle (+100/sec) - <span id="cost-castle">5,000</span>💰
             </button>
-            <button onclick="buyUpgrade('kingdom', 50000, 500)" style="padding: 10px; background: #fff8dc; border: 2px solid #daa520; border-radius: 8px; cursor: pointer;">
+            <button onclick="buyUpgrade('kingdom', 500)" style="padding: 10px; background: #fff8dc; border: 2px solid #daa520; border-radius: 8px; cursor: pointer;">
                 👑 Dragon Kingdom (+500/sec) - <span id="cost-kingdom">50,000</span>💰
             </button>
         </div>
         <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px; border-top: 1px dashed #b3d9ff; padding-top: 15px;">
             <p style="width: 100%; text-align: center; color: #66b3ff; margin: 5px 0;">✨ Dragon Fashion ✨</p>
-            <button onclick="buyCosmetic('flower', 100)" style="padding: 10px; background: #fff0f5; border: 2px solid #ffb6c1; border-radius: 8px; cursor: pointer;">
+            <button onclick="buyCosmetic('flower')" style="padding: 10px; background: #fff0f5; border: 2px solid #ffb6c1; border-radius: 8px; cursor: pointer;">
                 🌸 Flower Crown - <span id="cost-flower">100</span>💰
             </button>
-            <button onclick="buyCosmetic('hat', 500)" style="padding: 10px; background: #f5f5f5; border: 2px solid #a0a0a0; border-radius: 8px; cursor: pointer;">
+            <button onclick="buyCosmetic('hat')" style="padding: 10px; background: #f5f5f5; border: 2px solid #a0a0a0; border-radius: 8px; cursor: pointer;">
                 🎩 Top Hat - <span id="cost-hat">500</span>💰
             </button>
-            <button onclick="buyCosmetic('crown', 1000)" style="padding: 10px; background: #ffd700; border: 2px solid #daa520; border-radius: 8px; cursor: pointer;">
+            <button onclick="buyCosmetic('crown')" style="padding: 10px; background: #ffd700; border: 2px solid #daa520; border-radius: 8px; cursor: pointer;">
                 👑 Royal Crown - <span id="cost-crown">1,000</span>💰
             </button>
-            <button onclick="buyCosmetic('glasses', 750)" style="padding: 10px; background: #e0ffff; border: 2px solid #87ceeb; border-radius: 8px; cursor: pointer;">
+            <button onclick="buyCosmetic('glasses')" style="padding: 10px; background: #e0ffff; border: 2px solid #87ceeb; border-radius: 8px; cursor: pointer;">
                 🕶️ Cool Shades - <span id="cost-glasses">750</span>💰
             </button>
-            <button onclick="buyCosmetic('bow', 300)" style="padding: 10px; background: #ffb6c1; border: 2px solid #ff69b4; border-radius: 8px; cursor: pointer;">
+            <button onclick="buyCosmetic('bow')" style="padding: 10px; background: #ffb6c1; border: 2px solid #ff69b4; border-radius: 8px; cursor: pointer;">
                 🎀 Cute Bow - <span id="cost-bow">300</span>💰
             </button>
-            <button onclick="buyCosmetic('scarf', 800)" style="padding: 10px; background: #98fb98; border: 2px solid #32cd32; border-radius: 8px; cursor: pointer;">
+            <button onclick="buyCosmetic('scarf')" style="padding: 10px; background: #98fb98; border: 2px solid #32cd32; border-radius: 8px; cursor: pointer;">
                 🧣 Cozy Scarf - <span id="cost-scarf">800</span>💰
             </button>
-            <button onclick="buyCosmetic('wand', 1500)" style="padding: 10px; background: #e6e6fa; border: 2px solid #9370db; border-radius: 8px; cursor: pointer;">
+            <button onclick="buyCosmetic('wand')" style="padding: 10px; background: #e6e6fa; border: 2px solid #9370db; border-radius: 8px; cursor: pointer;">
                 🪄 Magic Wand - <span id="cost-wand">1,500</span>💰
             </button>
-            <button onclick="buyCosmetic('shield', 2000)" style="padding: 10px; background: #f5deb3; border: 2px solid #cd853f; border-radius: 8px; cursor: pointer;">
+            <button onclick="buyCosmetic('shield')" style="padding: 10px; background: #f5deb3; border: 2px solid #cd853f; border-radius: 8px; cursor: pointer;">
                 🛡️ Hero Shield - <span id="cost-shield">2,000</span>💰
             </button>
-            <button onclick="buyCosmetic('wings', 3000)" style="padding: 10px; background: #fffacd; border: 2px solid #ffd700; border-radius: 8px; cursor: pointer;">
+            <button onclick="buyCosmetic('wings')" style="padding: 10px; background: #fffacd; border: 2px solid #ffd700; border-radius: 8px; cursor: pointer;">
                 🧚 Fairy Wings - <span id="cost-wings">3,000</span>💰
             </button>
-            <button onclick="buyCosmetic('potion', 200)" style="padding: 10px; background: #fff8dc; border: 2px solid #daa520; border-radius: 8px; cursor: pointer;">
+            <button onclick="buyCosmetic('potion')" style="padding: 10px; background: #fff8dc; border: 2px solid #daa520; border-radius: 8px; cursor: pointer;">
                 🪴 Potted Gold (+2/sec) - <span id="cost-potion">200</span>💰
             </button>
-            <button onclick="buyCosmetic('ketchup', 99999)" style="padding: 10px; background: #ff0000; border: 2px solid #8b0000; border-radius: 8px; cursor: pointer; color: white;">
+            <button onclick="buyCosmetic('ketchup')" style="padding: 10px; background: #ff0000; border: 2px solid #8b0000; border-radius: 8px; cursor: pointer; color: white;">
                 🍅 The Dragonsauce - 99,999💰
             </button>
-            <button onclick="buyCosmetic('scepter', 25000)" style="padding: 10px; background: #8b0000; border: 2px solid #4a0000; border-radius: 8px; cursor: pointer; color: gold;">
+            <button onclick="buyCosmetic('scepter')" style="padding: 10px; background: #8b0000; border: 2px solid #4a0000; border-radius: 8px; cursor: pointer; color: gold;">
                 💜 The Scepter of S4uce - 25,000💰
             </button>
-            <button onclick="buyCosmetic('aura', 10000)" style="padding: 10px; background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3); border: 2px solid #ff4757; border-radius: 8px; cursor: pointer; color: white;">
+            <button onclick="buyCosmetic('aura')" style="padding: 10px; background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3); border: 2px solid #ff4757; border-radius: 8px; cursor: pointer; color: white;">
                 🌈 Rainbow Aura - 10,000💰
             </button>
-            <button onclick="buyCosmetic('pet', 7500)" style="padding: 10px; background: #ffeaa7; border: 2px solid #fdcb6e; border-radius: 8px; cursor: pointer;">
+            <button onclick="buyCosmetic('pet')" style="padding: 10px; background: #ffeaa7; border: 2px solid #fdcb6e; border-radius: 8px; cursor: pointer;">
                 🦎 Tiny Lizard Friend - 7,500💰
             </button>
         </div>
@@ -580,7 +580,8 @@
             updateCosmetics();
 
             // Make buyCosmetic available globally
-            window.buyCosmetic = function(item, cost) {
+            window.buyCosmetic = function(item) {
+                const cost = getCosmeticCost(item);
                 if (ownedCosmetics.includes(item)) {
                     alert('You already have this! 🐉');
                     return;
@@ -591,7 +592,7 @@
                     localStorage.setItem('dragonCosmetics', JSON.stringify(ownedCosmetics));
                     
                     // Apply bonus
-                    if (cosmetics[item].bonus) {
+                    if (cosmetics[item] && cosmetics[item].bonus) {
                         goldPerSecond += cosmetics[item].bonus;
                         document.getElementById('gps').textContent = goldPerSecond;
                         localStorage.setItem('dragonGPS', goldPerSecond);
@@ -600,7 +601,8 @@
                     document.getElementById('gold-count').textContent = gold;
                     localStorage.setItem('dragonGold', gold);
                     updateCosmetics();
-                    alert('You got ' + cosmetics[item].name + '! 🐉✨');
+                    checkAchievements();
+                    alert('You got ' + (cosmetics[item] ? cosmetics[item].name : item) + '! 🐉✨');
                 } else {
                     alert('Not enough gold! Keep clicking! 🐉');
                 }
