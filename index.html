@@ -146,67 +146,72 @@
         </script>
     </section>
     <script>
-        // Visitor Counter (localStorage - per browser)
-        function updateVisitorCounter() {
-            let count = localStorage.getItem('visitorCount');
-            if (!count) {
-                count = 0;
-            }
-            count = parseInt(count) + 1;
-            localStorage.setItem('visitorCount', count);
-            document.getElementById('visit-count').textContent = count;
-            document.getElementById('footer-count').textContent = count;
-        }
-        updateVisitorCounter();
-
-        // Dragon Clicker Game
-        let gold = parseInt(localStorage.getItem('dragonGold')) || 0;
-        let goldPerClick = parseInt(localStorage.getItem('dragonGPC')) || 1;
-        let goldPerSecond = parseInt(localStorage.getItem('dragonGPS')) || 0;
-
-        // Update initial display
-        document.getElementById('gold-count').textContent = gold;
-        document.getElementById('gpc').textContent = goldPerClick;
-        document.getElementById('gps').textContent = goldPerSecond;
-
-        // Click handler
-        document.getElementById('dragon-btn').addEventListener('click', function() {
-            gold += goldPerClick;
-            updateDisplay();
-            this.style.transform = 'scale(1.2)';
-            setTimeout(() => this.style.transform = 'scale(1)', 100);
-        });
-
-        function buyUpgrade(type, cost, bonus) {
-            if (gold >= cost) {
-                gold -= cost;
-                if (type === 'click') {
-                    goldPerClick += bonus;
-                    document.getElementById('gpc').textContent = goldPerClick;
-                    localStorage.setItem('dragonGPC', goldPerClick);
-                } else {
-                    goldPerSecond += bonus;
-                    document.getElementById('gps').textContent = goldPerSecond;
-                    localStorage.setItem('dragonGPS', goldPerSecond);
+        // Wait for page to load
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Visitor Counter (localStorage - per browser)
+            function updateVisitorCounter() {
+                let count = localStorage.getItem('visitorCount');
+                if (!count) {
+                    count = 0;
                 }
-                updateDisplay();
-            } else {
-                alert('Not enough gold! Keep clicking! 🐉');
+                count = parseInt(count) + 1;
+                localStorage.setItem('visitorCount', count);
+                document.getElementById('visit-count').textContent = count;
             }
-        }
+            updateVisitorCounter();
 
-        function updateDisplay() {
+            // Dragon Clicker Game
+            let gold = parseInt(localStorage.getItem('dragonGold')) || 0;
+            let goldPerClick = parseInt(localStorage.getItem('dragonGPC')) || 1;
+            let goldPerSecond = parseInt(localStorage.getItem('dragonGPS')) || 0;
+
+            // Update initial display
             document.getElementById('gold-count').textContent = gold;
-            localStorage.setItem('dragonGold', gold);
-        }
+            document.getElementById('gpc').textContent = goldPerClick;
+            document.getElementById('gps').textContent = goldPerSecond;
 
-        // Auto-gold every second
-        setInterval(() => {
-            if (goldPerSecond > 0) {
-                gold += goldPerSecond;
-                updateDisplay();
-            }
-        }, 1000);
+            // Click handler
+            const dragonBtn = document.getElementById('dragon-btn');
+            dragonBtn.onclick = function() {
+                gold += goldPerClick;
+                document.getElementById('gold-count').textContent = gold;
+                localStorage.setItem('dragonGold', gold);
+                dragonBtn.style.transform = 'scale(1.2)';
+                setTimeout(function() {
+                    dragonBtn.style.transform = 'scale(1)';
+                }, 100);
+            };
+
+            // Make buyUpgrade available globally
+            window.buyUpgrade = function(type, cost, bonus) {
+                if (gold >= cost) {
+                    gold -= cost;
+                    if (type === 'click') {
+                        goldPerClick += bonus;
+                        document.getElementById('gpc').textContent = goldPerClick;
+                        localStorage.setItem('dragonGPC', goldPerClick);
+                    } else {
+                        goldPerSecond += bonus;
+                        document.getElementById('gps').textContent = goldPerSecond;
+                        localStorage.setItem('dragonGPS', goldPerSecond);
+                    }
+                    document.getElementById('gold-count').textContent = gold;
+                    localStorage.setItem('dragonGold', gold);
+                } else {
+                    alert('Not enough gold! Keep clicking! 🐉');
+                }
+            };
+
+            // Auto-gold every second
+            setInterval(function() {
+                if (goldPerSecond > 0) {
+                    gold += goldPerSecond;
+                    document.getElementById('gold-count').textContent = gold;
+                    localStorage.setItem('dragonGold', gold);
+                }
+            }, 1000);
+        });
     </script>
 
     <footer style="text-align: center; margin-top: 20px; color: #999;">
