@@ -106,9 +106,15 @@
         <h2>🐉 Dragon Clicker</h2>
         <div style="text-align: center;">
             <p style="font-size: 1.2em;">Click the dragon to collect gold!</p>
-            <div id="dragon-btn" style="font-size: 4em; cursor: pointer; user-select: none; transition: transform 0.1s; display: inline-block;">🐉</div>
+            <div style="display: inline-block; position: relative;">
+                <div id="acc-left" style="position: absolute; right: 100%; top: 50%; transform: translateY(-50%); font-size: 1.5em; white-space: nowrap;"></div>
+                <div id="acc-right" style="position: absolute; left: 100%; top: 50%; transform: translateY(-50%); font-size: 1.5em; white-space: nowrap;"></div>
+                <div id="acc-top" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); font-size: 1.5em; white-space: nowrap; margin-bottom: 5px;"></div>
+                <div id="dragon-btn" style="font-size: 4em; cursor: pointer; user-select: none; transition: transform 0.1s; display: inline-block;">🐉</div>
+            </div>
             <p style="font-size: 2em; color: #ff9933;">💰 <span id="gold-count">0</span></p>
             <p style="color: #999;">Gold per click: <span id="gpc">1</span> | Gold per second: <span id="gps">0</span></p>
+            <p style="color: #999; font-size: 0.8em;">Prestige Level: <span id="prestige-level">0</span> (bonus: x<span id="prestige-bonus">1</span>)</p>
         </div>
         <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px;">
             <button onclick="buyUpgrade('click', 10, 1)" style="padding: 10px; background: #fff2e6; border: 2px solid #ffd9b3; border-radius: 8px; cursor: pointer;">
@@ -132,6 +138,27 @@
             <button onclick="buyCosmetic('hat', 500)" style="padding: 10px; background: #f5f5f5; border: 2px solid #a0a0a0; border-radius: 8px; cursor: pointer;">
                 🎩 Top Hat - 500💰
             </button>
+            <button onclick="buyCosmetic('crown', 1000)" style="padding: 10px; background: #ffd700; border: 2px solid #daa520; border-radius: 8px; cursor: pointer;">
+                👑 Royal Crown - 1,000💰
+            </button>
+            <button onclick="buyCosmetic('glasses', 750)" style="padding: 10px; background: #e0ffff; border: 2px solid #87ceeb; border-radius: 8px; cursor: pointer;">
+                🕶️ Cool Shades - 750💰
+            </button>
+            <button onclick="buyCosmetic('bow', 300)" style="padding: 10px; background: #ffb6c1; border: 2px solid #ff69b4; border-radius: 8px; cursor: pointer;">
+                🎀 Cute Bow - 300💰
+            </button>
+            <button onclick="buyCosmetic('scarf', 800)" style="padding: 10px; background: #98fb98; border: 2px solid #32cd32; border-radius: 8px; cursor: pointer;">
+                🧣 Cozy Scarf - 800💰
+            </button>
+            <button onclick="buyCosmetic('wand', 1500)" style="padding: 10px; background: #e6e6fa; border: 2px solid #9370db; border-radius: 8px; cursor: pointer;">
+                🪄 Magic Wand - 1,500💰
+            </button>
+            <button onclick="buyCosmetic('shield', 2000)" style="padding: 10px; background: #f5deb3; border: 2px solid #cd853f; border-radius: 8px; cursor: pointer;">
+                🛡️ Hero Shield - 2,000💰
+            </button>
+            <button onclick="buyCosmetic('wings', 3000)" style="padding: 10px; background: #fffacd; border: 2px solid #ffd700; border-radius: 8px; cursor: pointer;">
+                🦋 Fairy Wings - 3,000💰
+            </button>
             <button onclick="buyCosmetic('potion', 200)" style="padding: 10px; background: #fff8dc; border: 2px solid #daa520; border-radius: 8px; cursor: pointer;">
                 🪴 Potted Gold (+2/sec) - 200💰
             </button>
@@ -139,7 +166,11 @@
                 🍅 The Dragonsauce - 99,999💰
             </button>
         </div>
-        <div id="dragon-accessories" style="text-align: center; margin-top: 15px; font-size: 2em; min-height: 50px;"></div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="prestige()" style="padding: 15px 30px; background: linear-gradient(45deg, #ff6b6b, #feca57); border: 2px solid #ff4757; border-radius: 8px; cursor: pointer; font-size: 1.1em; color: white; font-weight: bold;">
+                🔄 Prestige (Reset for +50% bonus)
+            </button>
+        </div>
     </section>
 
     <section id="guestbook">
@@ -219,12 +250,29 @@
                 }
             };
 
-            // Cosmetic items
+            // Prestige system
+            let prestigeLevel = parseInt(localStorage.getItem('dragonPrestige')) || 0;
+            let prestigeMultiplier = 1 + (prestigeLevel * 0.5);
+            document.getElementById('prestige-level').textContent = prestigeLevel;
+            document.getElementById('prestige-bonus').textContent = prestigeMultiplier;
+
+            // Apply prestige bonus to base stats
+            goldPerClick = Math.floor(goldPerClick * prestigeMultiplier);
+            goldPerSecond = Math.floor(goldPerSecond * prestigeMultiplier);
+
+            // Cosmetic items with positions
             const cosmetics = {
-                flower: { emoji: '🌸', name: 'Flower Crown', bonus: 0 },
-                hat: { emoji: '🎩', name: 'Top Hat', bonus: 0 },
-                potion: { emoji: '🪴', name: 'Potted Gold', bonus: 2 },
-                ketchup: { emoji: '🍅', name: 'Ketchup of Dragonsauce', bonus: 100 }
+                flower: { emoji: '🌸', name: 'Flower Crown', bonus: 0, pos: 'top' },
+                hat: { emoji: '🎩', name: 'Top Hat', bonus: 0, pos: 'top' },
+                crown: { emoji: '👑', name: 'Royal Crown', bonus: 0, pos: 'top' },
+                glasses: { emoji: '🕶️', name: 'Cool Shades', bonus: 0, pos: 'top' },
+                bow: { emoji: '🎀', name: 'Cute Bow', bonus: 0, pos: 'left' },
+                scarf: { emoji: '🧣', name: 'Cozy Scarf', bonus: 0, pos: 'left' },
+                wand: { emoji: '🪄', name: 'Magic Wand', bonus: 5, pos: 'right' },
+                shield: { emoji: '🛡️', name: 'Hero Shield', bonus: 10, pos: 'right' },
+                wings: { emoji: '🧚', name: 'Fairy Wings', bonus: 15, pos: 'left' },
+                potion: { emoji: '🪴', name: 'Potted Gold', bonus: 2, pos: 'right' },
+                ketchup: { emoji: '🍅', name: 'Ketchup of Dragonsauce', bonus: 100, pos: 'top' }
             };
 
             // Load owned cosmetics
@@ -238,12 +286,24 @@
             });
             document.getElementById('gps').textContent = goldPerSecond;
 
-            // Display cosmetics on dragon
+            // Display cosmetics on dragon (surrounding it)
             function updateCosmetics() {
-                const container = document.getElementById('dragon-accessories');
-                container.innerHTML = ownedCosmetics.map(function(item) {
-                    return cosmetics[item] ? cosmetics[item].emoji : '';
-                }).join(' ');
+                document.getElementById('acc-left').innerHTML = '';
+                document.getElementById('acc-right').innerHTML = '';
+                document.getElementById('acc-top').innerHTML = '';
+                
+                ownedCosmetics.forEach(function(item) {
+                    if (cosmetics[item]) {
+                        const c = cosmetics[item];
+                        if (c.pos === 'left') {
+                            document.getElementById('acc-left').innerHTML += c.emoji + ' ';
+                        } else if (c.pos === 'right') {
+                            document.getElementById('acc-right').innerHTML += c.emoji + ' ';
+                        } else if (c.pos === 'top') {
+                            document.getElementById('acc-top').innerHTML += c.emoji + ' ';
+                        }
+                    }
+                });
             }
             updateCosmetics();
 
@@ -272,6 +332,40 @@
                 } else {
                     alert('Not enough gold! Keep clicking! 🐉');
                 }
+            };
+
+            // Prestige function
+            window.prestige = function() {
+                if (gold < 1000) {
+                    alert('You need at least 1,000 gold to prestige! 🐉');
+                    return;
+                }
+                if (!confirm('Prestige? This will reset your gold and upgrades but give you a +50% permanent bonus to all production! 🐉✨')) {
+                    return;
+                }
+                // Increase prestige level
+                prestigeLevel += 1;
+                localStorage.setItem('dragonPrestige', prestigeLevel);
+                
+                // Reset game but keep cosmetics
+                gold = 0;
+                goldPerClick = 1;
+                goldPerSecond = 0;
+                
+                // Clear upgrades
+                localStorage.setItem('dragonGPC', 1);
+                localStorage.setItem('dragonGPS', 0);
+                localStorage.setItem('dragonGold', 0);
+                
+                // Update display
+                prestigeMultiplier = 1 + (prestigeLevel * 0.5);
+                document.getElementById('prestige-level').textContent = prestigeLevel;
+                document.getElementById('prestige-bonus').textContent = prestigeMultiplier;
+                document.getElementById('gold-count').textContent = 0;
+                document.getElementById('gpc').textContent = 1;
+                document.getElementById('gps').textContent = 0;
+                
+                alert('PRESTIGE SUCCESS! You are now level ' + prestigeLevel + ' with ' + prestigeMultiplier + 'x production! 🐉💰');
             };
 
             // Auto-gold every second
