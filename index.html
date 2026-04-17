@@ -55,23 +55,6 @@
             text-decoration: underline;
         }
         /* For easy editing: Add comments and simple structure */
-        
-        /* Message styles */
-        .message {
-            background-color: #fff2e6;
-            border: 1px solid #ffd9b3;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-        }
-        .message-name {
-            color: #ff66b3;
-            font-weight: bold;
-        }
-        .message-date {
-            color: #999;
-            font-size: 0.8em;
-        }
     </style>
 </head>
 <body>
@@ -122,21 +105,26 @@ with HTTPS!
     </section>
 
     <section id="guestbook">
-        <h2>💌 Leave a Message</h2>
-        <form id="message-form" style="display: flex; flex-direction: column; gap: 10px; max-width: 400px; margin: 0 auto;">
-            <input type="text" id="visitor-name" placeholder="Your name" required 
-                style="padding: 10px; border: 2px solid #b3d9ff; border-radius: 8px; font-family: inherit;">
-            <textarea id="visitor-message" placeholder="Leave a sweet message..." rows="3" required
-                style="padding: 10px; border: 2px solid #b3d9ff; border-radius: 8px; font-family: inherit; resize: vertical;"></textarea>
-            <button type="submit" style="padding: 10px 20px; background-color: #ffb3d9; border: none; border-radius: 8px; cursor: pointer; font-family: inherit; color: #4a4a4a; font-weight: bold;">
-                💕 Send Love
-            </button>
-        </form>
-        <div id="messages-container" style="margin-top: 20px;"></div>
+        <h2>💌 Guestbook</h2>
+        <p style="text-align: center; color: #999;">Leave a message for Dragon_s4uce!</p>
+        <script src="https://giscus.app/client.js"
+            data-repo="Dragons4uce/Webstuff"
+            data-repo-id="R_kgDOR5CYWQ"
+            data-category="General"
+            data-category-id="DIC_kwDOR5CYWc4C7Dlm"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="preferred_color_scheme"
+            data-lang="en"
+            crossorigin="anonymous"
+            async>
+        </script>
     </section>
-
     <script>
-        // Visitor Counter
+        // Visitor Counter (localStorage - per browser)
         function updateVisitorCounter() {
             let count = localStorage.getItem('visitorCount');
             if (!count) {
@@ -148,48 +136,6 @@ with HTTPS!
             document.getElementById('footer-count').textContent = count;
         }
         updateVisitorCounter();
-
-        // Message Board
-        const messageForm = document.getElementById('message-form');
-        const messagesContainer = document.getElementById('messages-container');
-
-        function loadMessages() {
-            const messages = JSON.parse(localStorage.getItem('guestbookMessages') || '[]');
-            messagesContainer.innerHTML = '';
-            messages.slice().reverse().forEach(msg => {
-                const msgDiv = document.createElement('div');
-                msgDiv.className = 'message';
-                msgDiv.innerHTML = `
-                    <span class="message-name">${escapeHtml(msg.name)}</span>
-                    <span class="message-date"> - ${msg.date}</span>
-                    <p>${escapeHtml(msg.message)}</p>
-                `;
-                messagesContainer.appendChild(msgDiv);
-            });
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        messageForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('visitor-name').value;
-            const message = document.getElementById('visitor-message').value;
-            const date = new Date().toLocaleDateString();
-            
-            const messages = JSON.parse(localStorage.getItem('guestbookMessages') || '[]');
-            messages.push({ name, message, date });
-            localStorage.setItem('guestbookMessages', JSON.stringify(messages));
-            
-            document.getElementById('visitor-name').value = '';
-            document.getElementById('visitor-message').value = '';
-            loadMessages();
-        });
-
-        loadMessages();
     </script>
 
     <footer style="text-align: center; margin-top: 20px; color: #999;">
