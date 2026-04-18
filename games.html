@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games - Dragon_s4uce's Domain</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { color: #ffd700; text-align: center; }
+        .nav { text-align: center; margin-bottom: 30px; padding: 10px; background: #2d2d4a; border-radius: 8px; }
+        .nav a { color: #b3d9ff; margin: 0 10px; text-decoration: none; }
+        .nav a:hover { color: #ffd700; }
+        
+        /* Game sections */
+        .game-section { background: #2d2d4a; padding: 20px; margin: 20px 0; border-radius: 15px; border: 2px solid #4a4a6a; }
+        .game-section h2 { color: #ff99cc; margin-top: 0; text-align: center; }
+        
+        /* Dragon Clicker */
+        .clicker-area { text-align: center; margin: 20px 0; }
+        .dragon-container { position: relative; display: inline-block; width: 220px; height: 200px; margin: 20px auto; }
+        .cosmetic-top { position: absolute; top: -35px; left: 50%; transform: translateX(-50%); font-size: 1.5em; white-space: nowrap; min-width: 100px; text-align: center; }
+        .cosmetic-left { position: absolute; left: -45px; top: 50%; transform: translateY(-50%); font-size: 1.5em; }
+        .cosmetic-right { position: absolute; right: -45px; top: 50%; transform: translateY(-50%); font-size: 1.5em; }
+        .cosmetic-bottom { position: absolute; bottom: -35px; left: 50%; transform: translateX(-50%); font-size: 1.5em; white-space: nowrap; min-width: 100px; text-align: center; }
+        #dragon-btn { font-size: 4em; cursor: pointer; user-select: none; display: inline-block; line-height: 1; }
+        .gold-display { font-size: 2em; color: #ffd700; }
+        .stats { color: #888; }
+        
+        /* Buttons */
+        .upgrade-btn, .cosmetic-btn { padding: 10px; margin: 5px; border-radius: 8px; cursor: pointer; font-size: 0.9em; }
+        .upgrade-btn { background: #fff2e6; border: 2px solid #ffd9b3; color: #4a4a4a; }
+        .cosmetic-btn { background: #ffe6f7; border: 2px solid #ffb3d9; color: #4a4a4a; }
+        .button-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        
+        /* Achievements */
+        .achievements { margin-top: 20px; padding-top: 15px; border-top: 1px dashed #4a4a6a; }
+        .achievements p { color: #ff99cc; text-align: center; }
+        #achievements { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
+        
+        /* Prestige & Reset */
+        .prestige-area { text-align: center; margin-top: 15px; padding: 15px; background: #3d2d4a; border-radius: 8px; }
+        .prestige-btn { padding: 10px 20px; background: linear-gradient(45deg, #ff66b3, #ffd700); border: none; border-radius: 8px; cursor: pointer; color: white; font-weight: bold; }
+        .reset-btn { padding: 10px; background: #ff4444; border: 2px solid #cc0000; border-radius: 8px; cursor: pointer; color: white; margin-top: 10px; }
+        
+        /* Dragon Pet */
+        .pet-display { text-align: center; font-size: 5em; margin: 20px 0; position: relative; display: inline-block; }
+        .pet-status { position: absolute; top: -20px; right: -30px; font-size: 0.4em; }
+        .pet-name { font-size: 1.5em; color: #ff66b3; font-weight: bold; }
+        .pet-message { color: #888; font-style: italic; }
+        .pet-stats { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 20px 0; }
+        .stat-box { text-align: center; background: #1a1a2e; padding: 15px; border-radius: 10px; min-width: 80px; }
+        .stat-icon { font-size: 2em; }
+        .pet-actions { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .action-btn { padding: 15px 25px; border-radius: 10px; cursor: pointer; font-size: 1.1em; border: 2px solid; }
+        .feed-btn { background: #fff2e6; border-color: #ffd9b3; }
+        .play-btn { background: #e6fff7; border-color: #b3ffd9; }
+        .clean-btn { background: #e6f7ff; border-color: #b3d9ff; }
+        
+        footer { text-align: center; margin-top: 40px; color: #666; }
+        footer a { color: #ffd700; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="about.html">🏰 Home</a>
+            <a href="map.html">🗺️ Map</a>
+            <a href="about.html">👤 About</a>
+            <a href="blog.html">📜 Blog</a>
+            <a href="gallery.html">🖼️ Gallery</a>
+            <a href="games.html">🎮 Games</a>
+            <a href="music.html">🎵 Music</a>
+            <a href="links.html">🔗 Links</a>
+            <a href="contact.html">💬 Contact</a>
+        </div>
+        
+        <h1>🎮 Training Grounds</h1>
+        
+        <!-- Dragon Clicker -->
+        <div class="game-section">
+            <h2>🐉 Dragon Clicker <span id="dragon-title" style="font-size: 0.5em;"></span></h2>
+            <div class="clicker-area">
+                <p style="font-size: 1.2em;">Click the dragon to collect gold!</p>
+                <div class="dragon-container">
+                    <div id="cosmetic-top" class="cosmetic-top"></div>
+                    <div id="cosmetic-left" class="cosmetic-left"></div>
+                    <div id="cosmetic-right" class="cosmetic-right"></div>
+                    <div id="cosmetic-bottom" class="cosmetic-bottom"></div>
+                    <div id="dragon-btn">🐉</div>
+                </div>
+                <p class="gold-display">💰 <span id="gold-count">0</span></p>
+                <p class="stats">Gold per click: <span id="gpc">1</span> | Gold per second: <span id="gps">0</span> | Multiplier: x<span id="multiplier">1</span></p>
+            </div>
+            
+            <p style="text-align: center; color: #66b3ff; margin: 20px 0 10px 0; font-weight: bold;">💰 Upgrades (Earn More Gold)</p>
+            <div class="button-grid">
+                <button class="upgrade-btn" onclick="buyUpgrade('click', 50, 1)">🖱️ Better Clicks (+1/click) - 50💰</button>
+                <button class="upgrade-btn" onclick="buyUpgrade('auto', 200, 1)">🐾 Baby Dragon (+1/sec) - 200💰</button>
+                <button class="upgrade-btn" onclick="buyUpgrade('gold', 500, 5)">✨ Golden Scales (+5/sec) - 500💰</button>
+                <button class="upgrade-btn" onclick="buyUpgrade('hoard', 2000, 25)">💎 Dragon Hoard (+25/sec) - 2,000💰</button>
+                <button class="upgrade-btn" onclick="buyUpgrade('mine', 5000, 50)">⛏️ Gold Mine (+50/sec) - 5,000💰</button>
+                <button class="upgrade-btn" onclick="buyUpgrade('vault', 15000, 100)">🏦 Dragon Vault (+100/sec) - 15,000💰</button>
+                <button class="upgrade-btn" onclick="buyUpgrade('bank', 35000, 200)">🏛️ Ancient Bank (+200/sec) - 35,000💰</button>
+                <button class="upgrade-btn" onclick="buyUpgrade('treasury', 75000, 500)">💰 Royal Treasury (+500/sec) - 75,000💰</button>
+                <button class="upgrade-btn" onclick="buyUpgrade('fortress', 200000, 1000)">🏰 Gold Fortress (+1,000/sec) - 200,000💰</button>
+                <button class="upgrade-btn" onclick="buyUpgrade('kingdom', 500000, 2500)">👑 Dragon Kingdom (+2,500/sec) - 500,000💰</button>
+                <button class="upgrade-btn" onclick="buyUpgrade('empire', 1000000, 5000)">🌍 Dragon Empire (+5,000/sec) - 1,000,000💰</button>
+            </div>
+            
+            <p style="text-align: center; color: #ff66b3; margin: 20px 0 10px 0; font-weight: bold;">✨ Dragon Fashion (Purely Cosmetic)</p>
+            <div class="button-grid">
+                <button class="cosmetic-btn" onclick="buyCosmetic('flower', 500)">🌸 Flower Crown - 500💰</button>
+                <button class="cosmetic-btn" onclick="buyCosmetic('glasses', 750)">👓 Cool Glasses - 750💰</button>
+                <button class="cosmetic-btn" onclick="buyCosmetic('bow', 1500)">🎀 Cute Bow - 1,500💰</button>
+                <button class="cosmetic-btn" onclick="buyCosmetic('hat', 2000)">🎩 Top Hat - 2,000💰</button>
+                <button class="cosmetic-btn" onclick="buyCosmetic('crown', 5000)">👑 Royal Crown - 5,000💰</button>
+                <button class="cosmetic-btn" onclick="buyCosmetic('scarf', 7500)">🧣 Cozy Scarf - 7,500💰</button>
+                <button class="cosmetic-btn" onclick="buyCosmetic('wings', 10000)">🦋 Fairy Wings - 10,000💰</button>
+                <button class="cosmetic-btn" onclick="buyCosmetic('cape', 15000)">🦸 Hero Cape - 15,000💰</button>
+                <button class="cosmetic-btn" onclick="buyCosmetic('halo', 25000)">😇 Holy Halo - 25,000💰</button>
+                <button class="cosmetic-btn" onclick="buyCosmetic('sword', 35000)">⚔️ Dragon Sword - 35,000💰</button>
+                <button class="cosmetic-btn" onclick="buyCosmetic('orb', 50000)">🔮 Magic Orb - 50,000💰</button>
+                <button class="cosmetic-btn" onclick="buyCosmetic('staff', 75000)">🪄 Magic Staff - 75,000💰</button>
+                <button class="cosmetic-btn" onclick="buyCosmetic('crown_glow', 100000)">🌟 Glowing Crown - 100,000💰</button>
+                <button class="cosmetic-btn" onclick="buyCosmetic('aura', 150000)">✨ Dragon Aura - 150,000💰</button>
+                <button class="cosmetic-btn" onclick="buyCosmetic('throne', 250000)">🪑 Mini Throne - 250,000💰</button>
+                <button class="cosmetic-btn" onclick="buyCosmetic('rainbow', 500000)">🌈 Rainbow Sparkles - 500,000💰</button>
+                <button class="cosmetic-btn" onclick="buyCosmetic('ketchup', 9999999)">🍅 The Dragonsauce - 9,999,999💰</button>
+            </div>
+            
+            <div class="achievements">
+                <p>🏆 Achievements</p>
+                <div id="achievements"></div>
+            </div>
+            
+            <div class="prestige-area">
+                <p style="color: #9966cc; margin: 0 0 10px 0; font-weight: bold;">⚡ Prestige (Boosts Production)</p>
+                <button id="prestige-btn" class="prestige-btn" onclick="doPrestige()">🔄 Prestige - Get +50% Production Boost!</button>
+            </div>
+            
+            <div style="text-align: center;">
+                <button class="reset-btn" onclick="doReset()">🗑️ Reset Game (Wipe All Progress)</button>
+            </div>
+        </div>
+        
+        <!-- Dragon Pet -->
+        <div class="game-section">
+            <h2>🥚 Dragon Pet</h2>
+            <div style="text-align: center;">
+                <div class="pet-display">
+                    <div id="pet-status" class="pet-status"></div>
+                    🥚
+                </div>
+                <p id="pet-name" class="pet-name">Your Dragon Egg</p>
+                <p id="pet-message" class="pet-message">Waiting to hatch...</p>
+            </div>
+            
+            <div class="pet-stats">
+                <div class="stat-box">
+                    <div class="stat-icon">🍖</div>
+                    <p>Hunger</p>
+                    <span id="pet-hunger">100</span>%
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">😊</div>
+                    <p>Happiness</p>
+                    <span id="pet-happiness">100</span>%
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">⚡</div>
+                    <p>Energy</p>
+                    <span id="pet-energy">100</span>%
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">🧼</div>
+                    <p>Clean</p>
+                    <span id="pet-clean">100</span>%
+                </div>
+            </div>
+            
+            <div class="pet-actions">
+                <button class="action-btn feed-btn" onclick="feedPet()">🍖 Feed</button>
+                <button class="action-btn play-btn" onclick="playWithPet()">🎾 Play</button>
+                <button class="action-btn clean-btn" onclick="cleanPet()">🛁 Clean</button>
+            </div>
+            
+            <p style="text-align: center; color: #888; margin-top: 20px;">Age: <span id="pet-age">0</span> days</p>
+        </div>
+        
+        <footer>
+            <p>✨ Built with love by Dragon_s4uce ✨</p>
+            <p><a href="map.html">← Back to Map</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        // Dragon Clicker Game
+        let gold = parseInt(localStorage.getItem('dragonGold')) || 0;
+        let goldPerClick = parseInt(localStorage.getItem('dragonGPC')) || 1;
+        let goldPerSecond = parseInt(localStorage.getItem('dragonGPS')) || 0;
+        let multiplier = parseFloat(localStorage.getItem('dragonMultiplier')) || 1;
+        let prestigeCount = parseInt(localStorage.getItem('dragonPrestige')) || 0;
+        let totalGoldEarned = parseInt(localStorage.getItem('dragonTotalGold')) || 0;
+        let achievements = JSON.parse(localStorage.getItem('dragonAchievements')) || [];
+        let ownedCosmetics = JSON.parse(localStorage.getItem('dragonCosmetics')) || [];
+        let clickCount = parseInt(localStorage.getItem('dragonClicks')) || 0;
+        let upgradeCount = parseInt(localStorage.getItem('dragonUpgrades')) || 0;
+        
+        // Evolution system
+        const evolutions = [
+            { clicks: 0, emoji: '🥚', name: 'Egg' },
+            { clicks: 50, emoji: '🐣', name: 'Hatchling' },
+            { clicks: 200, emoji: '🐲', name: 'Young Dragon' },
+            { clicks: 500, emoji: '🦎', name: 'Adolescent' },
+            { clicks: 1000, emoji: '🐉', name: 'Adult Dragon' },
+            { clicks: 2500, emoji: '🦄', name: 'Elder Dragon' },
+            { clicks: 5000, emoji: '👑', name: 'Ancient One' }
+        ];
+        
+        function getEvolution() {
+            for (let i = evolutions.length - 1; i >= 0; i--) {
+                if (clickCount >= evolutions[i].clicks) return evolutions[i];
+            }
+            return evolutions[0];
+        }
+        
+        function getEffectiveGPC() { return goldPerClick * multiplier; }
+        function getEffectiveGPS() { return goldPerSecond * multiplier; }
+        
+        document.getElementById('gold-count').textContent = gold;
+        document.getElementById('gpc').textContent = getEffectiveGPC();
+        document.getElementById('gps').textContent = getEffectiveGPS();
+        document.getElementById('multiplier').textContent = multiplier;
+        
+        function updateEvolution() {
+            const evo = getEvolution();
+            document.getElementById('dragon-btn').textContent = evo.emoji;
+            document.getElementById('dragon-title').textContent = evo.name;
+        }
+        updateEvolution();
+        
+        document.getElementById('dragon-btn').onclick = function() {
+            const earned = getEffectiveGPC();
+            gold += earned;
+            totalGoldEarned += earned;
+            clickCount++;
+            document.getElementById('gold-count').textContent = gold;
+            localStorage.setItem('dragonGold', gold);
+            localStorage.setItem('dragonTotalGold', totalGoldEarned);
+            localStorage.setItem('dragonClicks', clickCount);
+            updateEvolution();
+            checkAchievements();
+        };
+        
+        window.buyUpgrade = function(type, cost, bonus) {
+            if (gold >= cost) {
+                gold -= cost;
+                if (type === 'click') goldPerClick += bonus;
+                else goldPerSecond += bonus;
+                upgradeCount++;
+                document.getElementById('gold-count').textContent = gold;
+                document.getElementById('gpc').textContent = getEffectiveGPC();
+                document.getElementById('gps').textContent = getEffectiveGPS();
+                localStorage.setItem('dragonGold', gold);
+                localStorage.setItem('dragonGPC', goldPerClick);
+                localStorage.setItem('dragonGPS', goldPerSecond);
+                localStorage.setItem('dragonUpgrades', upgradeCount);
+                checkAchievements();
+            } else {
+                alert('Not enough gold!');
+            }
+        };
+        
+        const cosmeticItems = {
+            'flower': { top: '🌸' },
+            'glasses': { top: '👓' },
+            'bow': { top: '🎀' },
+            'hat': { top: '🎩' },
+            'crown': { top: '👑' },
+            'scarf': { bottom: '🧣' },
+            'wings': { left: '🦋', right: '🦋' },
+            'cape': { left: '🦸', right: '🦸' },
+            'halo': { top: '😇' },
+            'sword': { right: '⚔️' },
+            'orb': { left: '🔮' },
+            'staff': { left: '🪄' },
+            'crown_glow': { top: '🌟👑🌟' },
+            'aura': { top: '✨', bottom: '✨', left: '✨', right: '✨' },
+            'throne': { bottom: '🪑' },
+            'rainbow': { top: '🌈' },
+            'ketchup': { top: '🍅', bottom: '🍅' }
+        };
+        
+        window.buyCosmetic = function(id, cost) {
+            if (gold >= cost) {
+                if (!ownedCosmetics.includes(id)) {
+                    gold -= cost;
+                    ownedCosmetics.push(id);
+                    document.getElementById('gold-count').textContent = gold;
+                    localStorage.setItem('dragonGold', gold);
+                    localStorage.setItem('dragonCosmetics', JSON.stringify(ownedCosmetics));
+                    updateCosmetics();
+                } else {
+                    alert('You already own this cosmetic!');
+                }
+            } else {
+                alert('Not enough gold!');
+            }
+        };
+        
+        function updateCosmetics() {
+            const positions = { top: '', left: '', right: '', bottom: '' };
+            ownedCosmetics.forEach(id => {
+                if (cosmeticItems[id]) {
+                    Object.keys(cosmeticItems[id]).forEach(pos => {
+                        positions[pos] += cosmeticItems[id][pos];
+                    });
+                }
+            });
+            document.getElementById('cosmetic-top').textContent = positions.top;
+            document.getElementById('cosmetic-left').textContent = positions.left;
+            document.getElementById('cosmetic-right').textContent = positions.right;
+            document.getElementById('cosmetic-bottom').textContent = positions.bottom;
+        }
+        updateCosmetics();
+        
+        const allAchievements = [
+            { id: 'click_10', name: 'First Steps', desc: 'Click 10 times', req: 10, type: 'clicks' },
+            { id: 'click_100', name: 'Getting Started', desc: 'Click 100 times', req: 100, type: 'clicks' },
+            { id: 'click_500', name: 'Click Master', desc: 'Click 500 times', req: 500, type: 'clicks' },
+            { id: 'click_1000', name: 'Click Legend', desc: 'Click 1000 times', req: 1000, type: 'clicks' },
+            { id: 'gold_1000', name: 'Small Hoard', desc: 'Earn 1,000 total gold', req: 1000, type: 'gold' },
+            { id: 'gold_10000', name: 'Growing Wealth', desc: 'Earn 10,000 total gold', req: 10000, type: 'gold' },
+            { id: 'gold_100000', name: 'Dragon Treasure', desc: 'Earn 100,000 total gold', req: 100000, type: 'gold' },
+            { id: 'upgrade_5', name: 'Upgrading', desc: 'Buy 5 upgrades', req: 5, type: 'upgrades' },
+            { id: 'upgrade_10', name: 'Well Equipped', desc: 'Buy 10 upgrades', req: 10, type: 'upgrades' },
+            { id: 'prestige_1', name: 'Rebirth', desc: 'Prestige once', req: 1, type: 'prestige' }
+        ];
+        
+        function checkAchievements() {
+            allAchievements.forEach(ach => {
+                let met = false;
+                if (ach.type === 'clicks' && clickCount >= ach.req) met = true;
+                if (ach.type === 'gold' && totalGoldEarned >= ach.req) met = true;
+                if (ach.type === 'upgrades' && upgradeCount >= ach.req) met = true;
+                if (ach.type === 'prestige' && prestigeCount >= ach.req) met = true;
+                
+                if (met && !achievements.includes(ach.id)) {
+                    achievements.push(ach.id);
+                    localStorage.setItem('dragonAchievements', JSON.stringify(achievements));
+                    alert('🏆 Achievement Unlocked: ' + ach.name + '!\n' + ach.desc);
+                }
+            });
+            updateAchievementsDisplay();
+        }
+        
+        function updateAchievementsDisplay() {
+            const container = document.getElementById('achievements');
+            container.innerHTML = allAchievements.map(ach => {
+                const earned = achievements.includes(ach.id);
+                return '<span style="padding: 5px 10px; background: ' + (earned ? '#ffd700' : '#4a4a6a') + '; border-radius: 15px; font-size: 0.8em; color: ' + (earned ? '#000' : '#888') + ';">' + ach.name + '</span>';
+            }).join('');
+        }
+        updateAchievementsDisplay();
+        
+        function updatePrestigeButton() {
+            const btn = document.getElementById('prestige-btn');
+            btn.style.display = totalGoldEarned >= 5000 ? 'inline-block' : 'none';
+        }
+        updatePrestigeButton();
+        
+        window.doPrestige = function() {
+            if (totalGoldEarned < 5000) return;
+            if (!confirm('Prestige? You will reset your gold and upgrades but gain a +50% permanent production bonus!')) return;
+            
+            prestigeCount++;
+            multiplier += 0.5;
+            gold = 0;
+            goldPerClick = 1;
+            goldPerSecond = 0;
+            totalGoldEarned = 0;
+            ownedCosmetics = [];
+            clickCount = 0;
+            upgradeCount = 0;
+            
+            localStorage.setItem('dragonPrestige', prestigeCount);
+            localStorage.setItem('dragonMultiplier', multiplier);
+            localStorage.setItem('dragonGold', 0);
+            localStorage.setItem('dragonGPC', 1);
+            localStorage.setItem('dragonGPS', 0);
+            localStorage.setItem('dragonTotalGold', 0);
+            localStorage.setItem('dragonCosmetics', '[]');
+            localStorage.setItem('dragonClicks', 0);
+            localStorage.setItem('dragonUpgrades', 0);
+            
+            document.getElementById('gold-count').textContent = 0;
+            document.getElementById('gpc').textContent = getEffectiveGPC();
+            document.getElementById('gps').textContent = getEffectiveGPS();
+            document.getElementById('multiplier').textContent = multiplier;
+            updateCosmetics();
+            updateEvolution();
+            updatePrestigeButton();
+            
+            alert('🎉 You have prestiged! Production multiplier is now x' + multiplier + '!');
+        };
+        
+        window.doReset = function() {
+            if (!confirm('Are you sure you want to reset EVERYTHING? This cannot be undone!')) return;
+            
+            localStorage.removeItem('dragonGold');
+            localStorage.removeItem('dragonGPC');
+            localStorage.removeItem('dragonGPS');
+            localStorage.removeItem('dragonCosmetics');
+            localStorage.removeItem('dragonTotalGold');
+            localStorage.removeItem('dragonClicks');
+            localStorage.removeItem('dragonUpgrades');
+            localStorage.removeItem('dragonAchievements');
+            localStorage.removeItem('dragonPrestige');
+            localStorage.removeItem('dragonMultiplier');
+            localStorage.removeItem('dragonEvoStage');
+            localStorage.removeItem('dragonEvoClicks');
+            
+            location.reload();
+        };
+        
+        // Gold per second auto-increment
+        setInterval(function() {
+            if (goldPerSecond > 0) {
+                const earned = getEffectiveGPS();
+                gold += earned;
+                totalGoldEarned += earned;
+                document.getElementById('gold-count').textContent = gold;
+                localStorage.setItem('dragonGold', gold);
+                localStorage.setItem('dragonTotalGold', totalGoldEarned);
+            }
+        }, 1000);
+        
+        // Dragon Pet
+        let pet = {
+            name: localStorage.getItem('petName') || 'Draco',
+            hunger: parseInt(localStorage.getItem('petHunger')) || 100,
+            happiness: parseInt(localStorage.getItem('petHappiness')) || 100,
+            energy: parseInt(localStorage.getItem('petEnergy')) || 100,
+            cleanliness: parseInt(localStorage.getItem('petClean')) || 100,
+            age: parseInt(localStorage.getItem('petAge')) || 0,
+            stage: localStorage.getItem('petStage') || 'egg',
+            hatched: localStorage.getItem('petHatched') === 'true',
+            lastVisit: parseInt(localStorage.getItem('petLastVisit')) || Date.now(),
+            createdAt: parseInt(localStorage.getItem('petCreatedAt')) || Date.now()
+        };
+        
+        const petStages = {
+            egg: { emoji: '🥚', name: 'Egg', message: 'Waiting to hatch...' },
+            baby: { emoji: '🐣', name: 'Baby', message: 'So tiny and cute!' },
+            child: { emoji: '🐲', name: 'Young', message: 'Growing up fast!' },
+            adult: { emoji: '🐉', name: 'Adult', message: 'A majestic dragon!' },
+            elder: { emoji: '🦄', name: 'Elder', message: 'Ancient and wise.' }
+        };
+        
+        function updatePetFromTime() {
+            const now = Date.now();
+            const elapsed = now - pet.lastVisit;
+            const minutesPassed = Math.floor(elapsed / 60000);
+            
+            if (minutesPassed > 0) {
+                pet.hunger = Math.max(0, pet.hunger - minutesPassed * 2);
+                pet.happiness = Math.max(0, pet.happiness - minutesPassed * 1);
+                pet.energy = Math.max(0, pet.energy - minutesPassed * 0.5);
+                pet.cleanliness = Math.max(0, pet.cleanliness - minutesPassed * 1);
+                
+                const daysPassed = Math.floor((now - pet.createdAt) / 86400000);
+                if (daysPassed > pet.age) {
+                    pet.age = daysPassed;
+                    if (pet.age >= 7 && !pet.hatched) {
+                        pet.hatched = true;
+                        pet.stage = 'baby';
+                    } else if (pet.age >= 30 && pet.stage === 'baby') {
+                        pet.stage = 'child';
+                    } else if (pet.age >= 100 && pet.stage === 'child') {
+                        pet.stage = 'adult';
+                    } else if (pet.age >= 365 && pet.stage === 'adult') {
+                        pet.stage = 'elder';
+                    }
+                }
+                
+                pet.lastVisit = now;
+                savePet();
+            }
+        }
+        
+        function savePet() {
+            localStorage.setItem('petName', pet.name);
+            localStorage.setItem('petHunger', pet.hunger);
+            localStorage.setItem('petHappiness', pet.happiness);
+            localStorage.setItem('petEnergy', pet.energy);
+            localStorage.setItem('petClean', pet.cleanliness);
+            localStorage.setItem('petAge', pet.age);
+            localStorage.setItem('petStage', pet.stage);
+            localStorage.setItem('petHatched', pet.hatched);
+            localStorage.setItem('petLastVisit', pet.lastVisit);
+            localStorage.setItem('petCreatedAt', pet.createdAt);
+        }
+        
+        function updatePetDisplay() {
+            const stage = petStages[pet.stage] || petStages.egg;
+            document.querySelector('.pet-display').childNodes[2].textContent = stage.emoji;
+            document.getElementById('pet-name').textContent = pet.hatched ? pet.name : 'Your Dragon Egg';
+            document.getElementById('pet-message').textContent = stage.message;
+            document.getElementById('pet-hunger').textContent = pet.hunger;
+            document.getElementById('pet-happiness').textContent = pet.happiness;
+            document.getElementById('pet-energy').textContent = pet.energy;
+            document.getElementById('pet-clean').textContent = pet.cleanliness;
+            document.getElementById('pet-age').textContent = pet.age;
+            
+            let status = '';
+            if (pet.hunger < 30) status += '🍖';
+            if (pet.happiness < 30) status += '😢';
+            if (pet.energy < 30) status += '😴';
+            if (pet.cleanliness < 30) status += '💩';
+            document.getElementById('pet-status').textContent = status;
+        }
+        
+        window.feedPet = function() {
+            pet.hunger = Math.min(100, pet.hunger + 20);
+            pet.energy = Math.min(100, pet.energy + 5);
+            savePet();
+            updatePetDisplay();
+        };
+        
+        window.playWithPet = function() {
+            pet.happiness = Math.min(100, pet.happiness + 20);
+            pet.hunger = Math.max(0, pet.hunger - 5);
+            pet.energy = Math.max(0, pet.energy - 10);
+            savePet();
+            updatePetDisplay();
+        };
+        
+        window.cleanPet = function() {
+            pet.cleanliness = Math.min(100, pet.cleanliness + 30);
+            savePet();
+            updatePetDisplay();
+        };
+        
+        updatePetFromTime();
+        updatePetDisplay();
+        
+        setInterval(function() {
+            updatePetFromTime();
+            updatePetDisplay();
+        }, 60000);
+    </script>
+</body>
+</html>

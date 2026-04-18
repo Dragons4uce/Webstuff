@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music - Dragon_s4uce's Domain</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #ffd700; text-align: center; }
+        .nav { text-align: center; margin-bottom: 30px; padding: 10px; background: #2d2d4a; border-radius: 8px; }
+        .nav a { color: #b3d9ff; margin: 0 10px; text-decoration: none; }
+        .nav a:hover { color: #ffd700; }
+        
+        /* Carousel */
+        .carousel-container { 
+            position: relative; 
+            max-width: 500px; 
+            margin: 30px auto; 
+            text-align: center; 
+        }
+        .carousel-btn {
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            font-size: 1.5em; 
+            background: #2d2d4a; 
+            border: 2px solid #4a4a6a; 
+            border-radius: 50%; 
+            width: 40px; 
+            height: 40px; 
+            cursor: pointer;
+            color: #b3d9ff;
+        }
+        .carousel-btn:hover { border-color: #ffd700; color: #ffd700; }
+        .prev-btn { left: -50px; }
+        .next-btn { right: -50px; }
+        .carousel-content {
+            padding: 30px; 
+            background: #2d2d4a; 
+            border: 2px solid #4a4a6a; 
+            border-radius: 15px;
+            min-height: 150px;
+        }
+        .carousel-content .emoji { font-size: 3em; display: block; margin-bottom: 15px; }
+        .carousel-content strong { color: #ff99cc; font-size: 1.3em; }
+        .carousel-content p { color: #aaa; margin-top: 10px; }
+        .carousel-content .counter { color: #666; font-size: 0.8em; margin-top: 15px; }
+        
+        footer { text-align: center; margin-top: 40px; color: #666; }
+        footer a { color: #ffd700; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="about.html">🏰 Home</a>
+            <a href="map.html">🗺️ Map</a>
+            <a href="about.html">👤 About</a>
+            <a href="blog.html">📜 Blog</a>
+            <a href="gallery.html">🖼️ Gallery</a>
+            <a href="games.html">🎮 Games</a>
+            <a href="music.html">🎵 Music</a>
+            <a href="links.html">🔗 Links</a>
+            <a href="contact.html">💬 Contact</a>
+        </div>
+        
+        <h1>🎵 The Music Hall</h1>
+        <p style="text-align: center; color: #888;">Here are some songs I've been listening to!</p>
+        
+        <div class="carousel-container">
+            <button class="carousel-btn prev-btn" onclick="prevSong()">◀</button>
+            <div class="carousel-content">
+                <div id="song-content"></div>
+            </div>
+            <button class="carousel-btn next-btn" onclick="nextSong()">▶</button>
+        </div>
+        
+        <footer>
+            <p>✨ Built with love by Dragon_s4uce ✨</p>
+            <p><a href="map.html">← Back to Map</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        const songs = [
+            { title: 'When Somebody Needs You', artist: 'Will Wood', emoji: '🎵' },
+            { title: 'In a Lake', artist: 'Mitski', emoji: '🌊' },
+            { title: 'Knocking at the Sky', artist: 'The Last Dinner Party', emoji: '🌌' },
+            { title: 'A Cautionary Tale', artist: 'Laufey', emoji: '⚠️' },
+            { title: 'Die with a Smile', artist: 'Lady Gaga & Bruno Mars', emoji: '😊' },
+            { title: 'Birds of a Feather', artist: 'Billie Eilish', emoji: '🐦' }
+        ];
+        let songIndex = 0;
+        
+        function showSong() {
+            const s = songs[songIndex];
+            document.getElementById('song-content').innerHTML = 
+                '<span class="emoji">' + s.emoji + '</span>' +
+                '<strong>' + s.title + '</strong>' +
+                '<p>' + s.artist + '</p>' +
+                '<p class="counter">' + (songIndex + 1) + ' / ' + songs.length + '</p>';
+        }
+        
+        window.nextSong = function() { 
+            songIndex = (songIndex + 1) % songs.length; 
+            showSong(); 
+        };
+        
+        window.prevSong = function() { 
+            songIndex = (songIndex - 1 + songs.length) % songs.length; 
+            showSong(); 
+        };
+        
+        showSong();
+    </script>
+</body>
+</html>

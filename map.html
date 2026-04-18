@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon_s4uce's Domain</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* Dragon Map Styles */
+        .map-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .map-title {
+            text-align: center;
+            font-size: 2.5em;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px #000;
+            margin-bottom: 30px;
+        }
+        
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .map-location {
+            background: linear-gradient(145deg, #2d2d4a, #1a1a2e);
+            border: 3px solid #4a4a6a;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .map-location:hover {
+            transform: scale(1.05);
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .map-location .emoji {
+            font-size: 3em;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .map-location .name {
+            font-size: 1.2em;
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        .map-location .desc {
+            font-size: 0.85em;
+            color: #aaa;
+            margin-top: 5px;
+        }
+        
+        /* Special larger location for home */
+        .map-location.home {
+            grid-column: span 3;
+            background: linear-gradient(145deg, #3d2d4a, #2a1a3e);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            padding: 20px;
+        }
+        
+        footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            .map-grid {
+                grid-template-columns: 1fr;
+            }
+            .map-location.home {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="map-container">
+        <h1 class="map-title">🗺️ Dragon's Domain Map</h1>
+        
+        <div class="map-grid">
+            <!-- Home - spans full width -->
+            <a href="about.html" class="map-location home">
+                <span class="emoji">🏰</span>
+                <span class="name">The Castle</span>
+                <span class="desc">Welcome! About me & guestbook</span>
+            </a>
+            
+            <!-- Row 2 -->
+            <a href="about.html" class="map-location">
+                <span class="emoji">👤</span>
+                <span class="name">The Tower</span>
+                <span class="desc">Learn about the dragon</span>
+            </a>
+            
+            <a href="blog.html" class="map-location">
+                <span class="emoji">📜</span>
+                <span class="name">The Library</span>
+                <span class="desc">Thoughts & writeups</span>
+            </a>
+            
+            <a href="gallery.html" class="map-location">
+                <span class="emoji">🖼️</span>
+                <span class="name">The Gallery</span>
+                <span class="desc">Art & inspiration</span>
+            </a>
+            
+            <!-- Row 3 -->
+            <a href="games.html" class="map-location">
+                <span class="emoji">🎮</span>
+                <span class="name">Training Grounds</span>
+                <span class="desc">Clicker & Pet games</span>
+            </a>
+            
+            <a href="music.html" class="map-location">
+                <span class="emoji">🎵</span>
+                <span class="name">The Music Hall</span>
+                <span class="desc">Favorite songs</span>
+            </a>
+            
+            <a href="links.html" class="map-location">
+                <span class="emoji">🔗</span>
+                <span class="name">The Outpost</span>
+                <span class="desc">Friends & resources</span>
+            </a>
+            
+            <!-- Row 4 -->
+            <a href="contact.html" class="map-location">
+                <span class="emoji">💬</span>
+                <span class="name">The Message Post</span>
+                <span class="desc">Leave a message</span>
+            </a>
+            
+            <div class="map-location" style="opacity: 0.5; cursor: default;">
+                <span class="emoji">🌲</span>
+                <span class="name">The Forest</span>
+                <span class="desc">Coming soon...</span>
+            </div>
+            
+            <div class="map-location" style="opacity: 0.5; cursor: default;">
+                <span class="emoji">🌊</span>
+                <span class="name">The Lake</span>
+                <span class="desc">Coming soon...</span>
+            </div>
+        </div>
+        
+        <footer>
+            <p>✨ Built with love by Dragon_s4uce ✨</p>
+            <p><a href="https://github.com/dragon-s4uce">GitHub</a> | <a href="#">Top</a></p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Dragon_s4uce's Domain</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container { max-width: 600px; margin: 0 auto; }
+        h1 { color: #ffd700; text-align: center; }
+        .nav { text-align: center; margin-bottom: 30px; }
+        .nav a { color: #b3d9ff; margin: 0 15px; text-decoration: none; }
+        .nav a:hover { color: #ffd700; }
+        .contact-form { background: #2d2d4a; padding: 30px; border-radius: 10px; border: 2px solid #4a4a6a; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 5px; color: #ff99cc; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #4a4a6a; background: #1a1a2e; color: #e0e0e0; font-family: inherit; }
+        .form-group textarea { min-height: 150px; resize: vertical; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #ffd700; }
+        button { background: linear-gradient(45deg, #ff66b3, #ffd700); border: none; padding: 15px 30px; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 1em; }
+        button:hover { transform: scale(1.05); }
+        .social-links { text-align: center; margin-top: 30px; }
+        .social-links a { font-size: 2em; margin: 0 15px; text-decoration: none; }
+        footer { text-align: center; margin-top: 40px; color: #666; }
+        footer a { color: #ffd700; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="about.html">🏰 Home</a>
+            <a href="map.html">🗺️ Map</a>
+            <a href="about.html">👤 About</a>
+            <a href="blog.html">📜 Blog</a>
+            <a href="gallery.html">🖼️ Gallery</a>
+            <a href="links.html">🔗 Links</a>
+            <a href="contact.html">💬 Contact</a>
+        </div>
+        
+        <h1>💬 The Message Post</h1>
+        
+        <div class="contact-form">
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Who are you?">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email (optional)</label>
+                    <input type="email" id="email" name="email" placeholder="If you want a reply...">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Write your message here..."></textarea>
+                </div>
+                
+                <button type="submit">📨 Send Message</button>
+            </form>
+            
+            <p id="formMessage" style="text-align: center; margin-top: 15px; color: #88ff88;"></p>
+        </div>
+        
+        <div class="social-links">
+            <p style="color: #888; margin-bottom: 15px;">Or find me elsewhere:</p>
+            <a href="https://github.com/dragon-s4uce" target="_blank" title="GitHub">🐙</a>
+            <!-- Add more social links -->
+        </div>
+        
+        <footer>
+            <p>✨ Built with love by Dragon_s4uce ✨</p>
+            <p><a href="map.html">← Back to Map</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !message) {
+                document.getElementById('formMessage').textContent = 'Please fill in your name and message!';
+                document.getElementById('formMessage').style.color = '#ff8888';
+                return;
+            }
+            
+            // Store in localStorage (for now - could be expanded to email/API)
+            const messages = JSON.parse(localStorage.getItem('dragonMessages') || '[]');
+            messages.push({
+                name: name,
+                email: document.getElementById('email').value,
+                message: message,
+                date: new Date().toISOString()
+            });
+            localStorage.setItem('dragonMessages', JSON.stringify(messages));
+            
+            document.getElementById('formMessage').textContent = 'Message sent! Thanks for reaching out! 🐉';
+            document.getElementById('contactForm').reset();
+        });
+    </script>
+</body>
+</html>
