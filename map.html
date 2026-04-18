@@ -197,16 +197,31 @@
             border-color: #8b6914;
         }
         
-        .map-location.home::after {
-            content: '📍 YOU ARE HERE';
-            position: absolute;
-            bottom: -25px;
-            left: 50%;
-            transform: translateX(-50%);
+        .map-location.home .you-are-here {
+            display: block;
             font-size: 0.7em;
-            color: #d4a574;
+            color: #ffd700;
             letter-spacing: 2px;
-            white-space: nowrap;
+            margin-top: 8px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Current page highlight */
+        .map-location.current {
+            border-color: #ffd700;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.5),
+                0 0 25px rgba(255, 215, 0, 0.4),
+                inset 0 0 20px rgba(255, 215, 0, 0.15);
+        }
+        
+        .map-location.current::before {
+            opacity: 1;
         }
         
         /* Footer */
@@ -340,5 +355,42 @@
             <p><a href="https://github.com/dragon-s4uce">GitHub</a> | <a href="#">Top</a></p>
         </footer>
     </div>
+    
+    <script>
+        // Get current page from URL
+        const currentPage = window.location.pathname.split('/').pop() || 'about.html';
+        
+        // Map page names to their corresponding location links
+        const pageToLocation = {
+            'about.html': { link: 'about.html', name: 'The Castle' },
+            'blog.html': { link: 'blog.html', name: 'The Library' },
+            'gallery.html': { link: 'gallery.html', name: 'The Gallery' },
+            'games.html': { link: 'games.html', name: 'Training Grounds' },
+            'music.html': { link: 'music.html', name: 'The Music Hall' },
+            'links.html': { link: 'links.html', name: 'The Outpost' },
+            'contact.html': { link: 'contact.html', name: 'The Message Post' }
+        };
+        
+        // Get all map location links
+        const locations = document.querySelectorAll('.map-location');
+        
+        locations.forEach(loc => {
+            const href = loc.getAttribute('href');
+            
+            // Check if this is the current page
+            if (href === currentPage || (currentPage === '' && href === 'about.html')) {
+                loc.classList.add('current');
+                
+                // Add "YOU ARE HERE" indicator
+                const nameEl = loc.querySelector('.name');
+                if (nameEl && !loc.classList.contains('home')) {
+                    const hereEl = document.createElement('span');
+                    hereEl.className = 'you-are-here';
+                    hereEl.textContent = '📍 YOU ARE HERE';
+                    loc.appendChild(hereEl);
+                }
+            }
+        });
+    </script>
 </body>
 </html>
