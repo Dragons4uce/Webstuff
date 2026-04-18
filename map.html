@@ -13,34 +13,96 @@
             padding: 20px;
             line-height: 1.6;
             min-height: 100vh;
+            background-image: 
+                radial-gradient(ellipse at center, transparent 0%, #1a1a2e 70%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L35 25H55L39 37L45 57L30 45L15 57L21 37L5 25H25L30 5Z' fill='%232d2d4a' fill-opacity='0.15'/%3E%3C/svg%3E");
         }
         
-        /* Dragon Map Styles */
+        /* Dragon Map Styles - Treasure Map Theme */
         .map-container {
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
             position: relative;
+            background: 
+                linear-gradient(rgba(139, 90, 43, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(139, 90, 43, 0.1) 1px, transparent 1px),
+                linear-gradient(135deg, #2a1f14 0%, #1a1510 50%, #2a1f14 100%);
+            background-size: 30px 30px, 30px 30px, 100% 100%;
+            border: 8px solid #5c3d2e;
+            border-radius: 8px;
+            box-shadow: 
+                inset 0 0 60px rgba(0,0,0,0.5),
+                0 0 30px rgba(0,0,0,0.8),
+                0 10px 20px rgba(92, 61, 46, 0.4);
+            padding: 30px;
+        }
+        
+        /* Compass Rose */
+        .compass {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            opacity: 0.7;
+            animation: compass-spin 20s linear infinite;
+        }
+        
+        @keyframes compass-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .compass:hover {
+            opacity: 1;
+            animation-play-state: paused;
         }
         
         .map-title {
             text-align: center;
             font-size: 2.5em;
-            color: #ffd700;
-            text-shadow: 2px 2px 4px #000;
-            margin-bottom: 30px;
+            color: #d4a574;
+            text-shadow: 
+                2px 2px 4px #000,
+                0 0 30px rgba(212, 165, 116, 0.3);
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            font-variant: small-caps;
+        }
+        
+        .coordinates {
+            text-align: center;
+            color: #8b6914;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
         }
         
         .map-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 15px;
             padding: 20px;
+            position: relative;
+        }
+        
+        /* Map path lines */
+        .map-grid::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #5c3d2e, transparent);
+            opacity: 0.5;
+            z-index: 0;
         }
         
         .map-location {
-            background: linear-gradient(145deg, #2d2d4a, #1a1a2e);
-            border: 3px solid #4a4a6a;
-            border-radius: 15px;
+            background: linear-gradient(145deg, #3d2d1a, #2a1f14);
+            border: 3px solid #5c3d2e;
+            border-radius: 8px;
             padding: 20px;
             text-align: center;
             cursor: pointer;
@@ -48,49 +110,123 @@
             text-decoration: none;
             color: inherit;
             display: block;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .map-location::before {
+            content: '✦';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #d4a574;
+            font-size: 1.2em;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .map-location:hover::before {
+            opacity: 1;
         }
         
         .map-location:hover {
-            transform: scale(1.05);
-            border-color: #ffd700;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            transform: translateY(-5px) scale(1.03);
+            border-color: #d4a574;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(212, 165, 116, 0.3),
+                inset 0 0 20px rgba(212, 165, 116, 0.1);
         }
         
         .map-location .emoji {
-            font-size: 3em;
+            font-size: 2.8em;
             display: block;
             margin-bottom: 10px;
+            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.5));
+            transition: transform 0.3s;
+        }
+        
+        .map-location:hover .emoji {
+            transform: scale(1.1) rotate(5deg);
         }
         
         .map-location .name {
-            font-size: 1.2em;
-            color: #ffd700;
+            font-size: 1.1em;
+            color: #d4a574;
             font-weight: bold;
+            text-shadow: 1px 1px 2px #000;
         }
         
         .map-location .desc {
+            font-size: 0.8em;
+            color: #a08060;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        /* Tooltip */
+        .map-location .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: #1a1510;
+            border: 2px solid #d4a574;
+            padding: 10px 15px;
+            border-radius: 5px;
             font-size: 0.85em;
-            color: #aaa;
-            margin-top: 5px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 10;
+            color: #d4a574;
+        }
+        
+        .map-location:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(-15px);
         }
         
         /* Special larger location for home */
         .map-location.home {
             grid-column: span 3;
-            background: linear-gradient(145deg, #3d2d4a, #2a1a3e);
+            background: linear-gradient(145deg, #4a3020, #2a1f14);
+            border-color: #8b6914;
+        }
+        
+        .map-location.home::after {
+            content: '📍 YOU ARE HERE';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7em;
+            color: #d4a574;
+            letter-spacing: 2px;
+            white-space: nowrap;
         }
         
         /* Footer */
         footer {
             text-align: center;
             margin-top: 40px;
-            color: #666;
+            color: #5c3d2e;
             padding: 20px;
+            border-top: 2px dashed #5c3d2e;
         }
         
         footer a {
-            color: #ffd700;
+            color: #d4a574;
             text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
         
         /* Responsive */
@@ -106,11 +242,27 @@
 </head>
 <body>
     <div class="map-container">
+        <!-- Compass Rose -->
+        <svg class="compass" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="#5c3d2e" stroke-width="2"/>
+            <circle cx="50" cy="50" r="35" fill="none" stroke="#5c3d2e" stroke-width="1"/>
+            <polygon points="50,10 55,45 50,50 45,45" fill="#d4a574"/>
+            <polygon points="50,90 55,55 50,50 45,55" fill="#5c3d2e"/>
+            <polygon points="10,50 45,45 50,50 45,55" fill="#5c3d2e"/>
+            <polygon points="90,50 55,45 50,50 55,55" fill="#d4a574"/>
+            <text x="50" y="8" text-anchor="middle" fill="#d4a574" font-size="8">N</text>
+            <text x="50" y="98" text-anchor="middle" fill="#5c3d2e" font-size="8">S</text            <text x="5" y="53" text-anchor="middle" fill="#5c3d2e" font-size="8">W</text>
+            <text x="95" y="53" text-anchor="middle" fill="#d4a574" font-size="8">E</text>
+            <circle cx="50" cy="50" r="5" fill="#d4a574"/>
+        </svg>
+        
         <h1 class="map-title">🗺️ Dragon's Domain Map</h1>
+        <p class="coordinates">Coordinates: 34°52'S 56°11'W • Sector 7G</p>
         
         <div class="map-grid">
             <!-- Home - spans full width -->
             <a href="about.html" class="map-location home">
+                <span class="tooltip">Click to enter the castle!</span>
                 <span class="emoji">🏰</span>
                 <span class="name">The Castle</span>
                 <span class="desc">Welcome! About me & guestbook</span>
@@ -118,18 +270,21 @@
             
             <!-- Row 2 -->
             <a href="about.html" class="map-location">
+                <span class="tooltip">Ascend to the tower</span>
                 <span class="emoji">👤</span>
                 <span class="name">The Tower</span>
                 <span class="desc">Learn about the dragon</span>
             </a>
             
             <a href="blog.html" class="map-location">
+                <span class="tooltip">Browse the ancient scrolls</span>
                 <span class="emoji">📜</span>
                 <span class="name">The Library</span>
                 <span class="desc">Thoughts & writeups</span>
             </a>
             
             <a href="gallery.html" class="map-location">
+                <span class="tooltip">View the art gallery</span>
                 <span class="emoji">🖼️</span>
                 <span class="name">The Gallery</span>
                 <span class="desc">Art & inspiration</span>
@@ -137,18 +292,21 @@
             
             <!-- Row 3 -->
             <a href="games.html" class="map-location">
+                <span class="tooltip">Train your skills!</span>
                 <span class="emoji">🎮</span>
                 <span class="name">Training Grounds</span>
                 <span class="desc">Clicker & Pet games</span>
             </a>
             
             <a href="music.html" class="map-location">
+                <span class="tooltip">Listen to the music</span>
                 <span class="emoji">🎵</span>
                 <span class="name">The Music Hall</span>
                 <span class="desc">Favorite songs</span>
             </a>
             
             <a href="links.html" class="map-location">
+                <span class="tooltip">Visit the outpost</span>
                 <span class="emoji">🔗</span>
                 <span class="name">The Outpost</span>
                 <span class="desc">Friends & resources</span>
@@ -156,18 +314,21 @@
             
             <!-- Row 4 -->
             <a href="contact.html" class="map-location">
+                <span class="tooltip">Send a raven</span>
                 <span class="emoji">💬</span>
                 <span class="name">The Message Post</span>
                 <span class="desc">Leave a message</span>
             </a>
             
             <div class="map-location" style="opacity: 0.5; cursor: default;">
+                <span class="tooltip">Unexplored territory...</span>
                 <span class="emoji">🌲</span>
                 <span class="name">The Forest</span>
                 <span class="desc">Coming soon...</span>
             </div>
             
             <div class="map-location" style="opacity: 0.5; cursor: default;">
+                <span class="tooltip">Unexplored territory...</span>
                 <span class="emoji">🌊</span>
                 <span class="name">The Lake</span>
                 <span class="desc">Coming soon...</span>
