@@ -327,12 +327,12 @@
                 <span class="desc">Leave a message</span>
             </a>
 
-            <a href="map-location" class="map-location">
+            <div class="map-location" style="opacity: 0.5; cursor: default;">
                 <span class="tooltip">Unexplored territory...</span>
                 <span class="emoji">🖼️</span>
                 <span class="name">Ruined Gallery</span>
-                <span class="desc">Coming soon...</span>
-            </a>
+                <span class="desc">Unexplored territory...</span>
+            </div>
             
             <div class="map-location" style="opacity: 0.5; cursor: default;">
                 <span class="tooltip">Unexplored territory...</span>
@@ -351,14 +351,13 @@
         
         <footer>
             <p>✨ Built with love by Dragon_s4uce ✨</p>
-            <p><a href="https://github.com/dragon-s4uce">GitHub</a> | <a href="#">Top</a></p>
+            <p><a href="https://github.com/dragon-s4uce" target="_blank">GitHub</a> | <a href="#">Top</a></p>
         </footer>
     </div>
     
     <script>
         // Get current page from URL
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        
         // Map page names to their corresponding location links
         const pageToLocation = {
             'index.html': { link: 'about.html', name: 'The Castle' },
@@ -371,25 +370,22 @@
             'links.html': { link: 'links.html', name: 'The Outpost' },
             'contact.html': { link: 'contact.html', name: 'The Message Post' }
         };
-        
         // Get all map location links
         const locations = document.querySelectorAll('.map-location');
-        
         // Determine which page we're on
         let targetHref = pageToLocation[currentPage]?.link || 'about.html';
-        
+        // Only add marker to the first matching location for each page type
+        let markerAdded = false;
         locations.forEach(loc => {
             const href = loc.getAttribute('href');
-            
-            // Check if this is the current page
-            if (href === targetHref) {
+            // For about.html, only mark the first .home location
+            if (!markerAdded && href === targetHref && (targetHref !== 'about.html' || loc.classList.contains('home'))) {
                 loc.classList.add('current');
-                
-                // Add "YOU ARE HERE" indicator
                 const hereEl = document.createElement('span');
                 hereEl.className = 'you-are-here';
                 hereEl.textContent = '📍 YOU ARE HERE';
                 loc.appendChild(hereEl);
+                markerAdded = true;
             }
         });
     </script>
