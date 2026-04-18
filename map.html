@@ -197,7 +197,7 @@
             border-color: #8b6914;
         }
         
-        .map-location.home .you-are-here {
+        .map-location .you-are-here {
             display: block;
             font-size: 0.7em;
             color: #ffd700;
@@ -358,10 +358,12 @@
     
     <script>
         // Get current page from URL
-        const currentPage = window.location.pathname.split('/').pop() || 'about.html';
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
         
         // Map page names to their corresponding location links
         const pageToLocation = {
+            'index.html': { link: 'about.html', name: 'The Castle' },
+            'map.html': { link: 'about.html', name: 'The Castle' },
             'about.html': { link: 'about.html', name: 'The Castle' },
             'blog.html': { link: 'blog.html', name: 'The Library' },
             'gallery.html': { link: 'gallery.html', name: 'The Gallery' },
@@ -374,21 +376,21 @@
         // Get all map location links
         const locations = document.querySelectorAll('.map-location');
         
+        // Determine which page we're on
+        let targetHref = pageToLocation[currentPage]?.link || 'about.html';
+        
         locations.forEach(loc => {
             const href = loc.getAttribute('href');
             
             // Check if this is the current page
-            if (href === currentPage || (currentPage === '' && href === 'about.html')) {
+            if (href === targetHref) {
                 loc.classList.add('current');
                 
                 // Add "YOU ARE HERE" indicator
-                const nameEl = loc.querySelector('.name');
-                if (nameEl && !loc.classList.contains('home')) {
-                    const hereEl = document.createElement('span');
-                    hereEl.className = 'you-are-here';
-                    hereEl.textContent = '📍 YOU ARE HERE';
-                    loc.appendChild(hereEl);
-                }
+                const hereEl = document.createElement('span');
+                hereEl.className = 'you-are-here';
+                hereEl.textContent = '📍 YOU ARE HERE';
+                loc.appendChild(hereEl);
             }
         });
     </script>
